@@ -1,0 +1,17 @@
+prompt 0
+nx 32
+nt 32
+switch_flag 1
+no_of_garbage_loops 100
+bin_length 5
+no_of_hmc_iterations 1100
+meas_length 5
+seg_length 100
+g 0.46
+nf 4
+no_of_md_steps 25
+step_size 0.04
+max_cg_iterations_for_hamil 5000
+max_cg_iterations_for_piup 2000
+residue_for_cg_hamil 1.0e-7 
+residue_for_cg_piup 1.0e-5
