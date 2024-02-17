@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import sys
 import os
 import math
+import random
 
 
 class psferm:
@@ -795,4 +796,97 @@ def hamil(hflag, flag):
 
 
 def zerolat():
-    print("")
+
+    global lattice, volume
+
+    print("ZEROLAT: All zero initial config. of `sigma' field.")
+
+    for i in range(volume):
+        lattice[i].sigma = 0
+
+
+def coldlat():
+
+    global lattice, volume
+
+    print(" COLDLAT: Cold initial config. of `sigma' field")
+
+    for i in range(volume):
+        lattice[i].sigma = 1
+
+
+def coldlat2():
+
+    global lattice, volume
+
+    print(" COLDLAT.4: Cold initial config. of `sigma' field")
+
+    for i in range(volume):
+        lattice[i].sigma = 0.4
+
+
+def hotlat():
+
+    global lattice, volume
+
+    print(" HOTLAT: Hot initial config. of `sigma' field.")
+
+    for i in range(volume):
+        lattice[i].sigma = 2 * ran2() - 1
+
+
+def filelat():
+
+    global lattice, volume
+
+    print(" Configuration to be read from the file sigma.in")
+    print("currently not supported was feeling tired")
+    # for i in range(volume):
+        # lattice[i].sigma = 0.4
+
+def funnylat():
+
+    global lattice, volume
+
+    for i in range(volume):
+        lattice[i].sigma = i
+
+
+def piup(t):
+    global lattice, volume, g, nf, cgiter2, residue2, PLUS, EVENANDODD
+    print("Piup Calculation. \n")
+
+    for i in range(volume):
+        lattice[i].mom -= ((1/(g*g)) * lattice[i].phi * t)
+
+    for n in range(nf):
+        cg_md("chi","eta",cgiter2, residue2, 1, n)
+        for i in range(volume):
+            lattice[i].mom -= lattice[i].chi.f[n] * t
+            matp2d("chi","eta",PLUS,EVENANDODD,n)
+            for i in range(volume):
+                lattice[i].mom += (2 * lattice[i].p * lattice[i].eta.f[n] * t)
+
+
+
+def ran2():
+      return random.random()
+
+def gasdev():
+   iset = 0
+   gset = 0.0
+
+   if iset == 0:
+      while True:
+         v1 = (2.0 * ran2()) - 1.0
+         v2 = (2.0 * ran2()) - 1.0
+         rsq = (v1 * v1) + (v2 * v2)
+         if rsq < 1.0 and rsq != 0.0:
+            break
+      fac = math.sqrt(-2.0 * math.log(rsq) / rsq)
+      gset = v1 * fac
+      iset = 1
+      return v2 * fac
+   else:
+      iset = 0
+      return gset
