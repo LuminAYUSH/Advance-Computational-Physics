@@ -693,6 +693,26 @@ def gather(field, index, parity, dest):
         for j in range(volume):
                 dest[j] = lattice[neighbor[index][j]][field]
 
+def gauss():
+    import random
+    iset = 0
+    gset = 0
+    
+    if iset == 0:
+        v1 = 2 * random.random() - 1
+        v2 = 2 * random.random() - 1
+        rsq = v1 * v1 + v2 * v2
+        while rsq >= 1 or rsq == 0:
+            v1 = 2 * random.random() - 1
+            v2 = 2 * random.random() - 1
+            rsq = v1 * v1 + v2 * v2
+        fac = math.sqrt(-2 * math.log(rsq) / rsq)
+        gset = v1 * fac
+        iset = 1
+        return v2 * fac
+    else:
+        iset = 0
+        return gset
 
 def hmc():
     global lattice, volume, nf, DELTAMAX, con
