@@ -65,9 +65,9 @@ def initial_set():
     print("Alpha machine, Version 1\n")
     print("type 0 for no prompts, 1 for prompts or 2 for list of prompts\n")
 
-    status = getprompt() #Using the direct value inplace of the pointer in the original code base
-
-    if status !=0:
+    try:
+        status = getprompt() #Using the direct value inplace of the pointer in the original code base
+    except:
         print("error in input: initial prompt")
         return -1
 
@@ -693,26 +693,6 @@ def gather(field, index, parity, dest):
         for j in range(volume):
                 dest[j] = lattice[neighbor[index][j]][field]
 
-def gauss():
-    import random
-    iset = 0
-    gset = 0
-    
-    if iset == 0:
-        v1 = 2 * random.random() - 1
-        v2 = 2 * random.random() - 1
-        rsq = v1 * v1 + v2 * v2
-        while rsq >= 1 or rsq == 0:
-            v1 = 2 * random.random() - 1
-            v2 = 2 * random.random() - 1
-            rsq = v1 * v1 + v2 * v2
-        fac = math.sqrt(-2 * math.log(rsq) / rsq)
-        gset = v1 * fac
-        iset = 1
-        return v2 * fac
-    else:
-        iset = 0
-        return gset
 
 def hmc():
     global lattice, volume, nf, DELTAMAX, con
