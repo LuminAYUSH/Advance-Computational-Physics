@@ -38,9 +38,9 @@ class site:
 
 def setup_gn():
     prompt = initial_set()
-    layout();
-    make_lattice();
-    make_nn_gather();
+    layout()
+    make_lattice()
+    make_nn_gather()
     return prompt
 
 
@@ -66,13 +66,15 @@ def initial_set():
     print("type 0 for no prompts, 1 for prompts or 2 for list of prompts\n")
 
     try:
-        status = getprompt() #Using the direct value inplace of the pointer in the original code base
+        prompt = getprompt() #Using the direct value inplace of the pointer in the original code base
     except:
         print("error in input: initial prompt")
         return -1
 
-    nx = get_i(prompt, "nx")
-    nt = get_i(prompt, "nt")
+#     nx = get_i(prompt, "nx")
+    nx = 16
+#     nt = get_i(prompt, "nt")
+    nt = 16
 
     if nx%2 !=0 and nt%2 !=0:
         print("nx, nt must be even!! \n")
@@ -81,31 +83,38 @@ def initial_set():
     print(f"Lattice dimensions = {nx} {nt}\n")
 
 #     Switch flag
-    sw_flag = get_i(prompt,"switch_flag")
+#     sw_flag = get_i(prompt,"switch_flag")
+    sw_flag = 0
     print(f"Switch_Flag = {sw_flag}\n")
 
 #     Number of measurements
-    no_garbage = get_i(prompt,"no_of_garbage_loops")
+#     no_garbage = get_i(prompt,"no_of_garbage_loops")
+    no_garbage = 1000
     print(f"No of garbage loops = {no_garbage}")
 
     # the length of each bin
-    bin_length = get_i(prompt,"bin_length")
+#     bin_length = get_i(prompt,"bin_length")
+    bin_length = 1
     print(f"bin_length = {bin_length}")
 
     # Number of HMC iterations, only accepted ones count
-    hmc_it = get_i(prompt,"no_of_hmc_iterations")
+#     hmc_it = get_i(prompt,"no_of_hmc_iterations")
+    hmc_it = 1000
     print(f"# of hmc iterations = {hmc_it}")
 
     # length after which fermionic observables are measured
-    meas_length = get_i(prompt,"meas_length")
+#     meas_length = get_i(prompt,"meas_length")
+    meas_length = 1
     print(f"meas_length = {meas_length}")
 
     # length after which the propagator autocorrelations are calculated
-    prop_length = get_i(prompt,"prop_length")
+#     prop_length = get_i(prompt,"prop_length")
+    prop_length = 1
     print(f"prop_length = {prop_length}")
 
     # segment length after which autocorrelations are measured
-    seg_length = get_i(prompt,"seg_length")
+#     seg_length = get_i(prompt,"seg_length")
+    seg_length = 1
     print(f"seg_length = {seg_length}")
 
     volume = nx*nt
@@ -158,13 +167,13 @@ def make_lattice():
     x = None
     t = None
 
-    no_bin = no_garbage/bin_length
-    no_meas = meas_loop/meas_length
-    no_a_seg = meas_loop/seg_length
-    no_prop_seg = meas_loop/prop_length
+    no_bin = int(no_garbage/bin_length)
+    no_meas = int(meas_loop/meas_length)
+    no_a_seg = int(meas_loop/seg_length)
+    no_prop_seg = int(meas_loop/prop_length)
 
     #All allocations managed by python backend
-    lattice = [site()]*volume
+    lattice = [site() for i in range(volume)]
     store = [None]*no_meas
     conf = [None]*volume
     con = [None]*volume
@@ -185,16 +194,18 @@ def make_lattice():
     T_int = [[[None]*no_a_seg]*MAXT_cut]*NOT_cut
     T_int_prop = [[[[None]*no_prop_seg]*nt]*MAXT_cut]*NOT_cut
     neighbor = [[None]*4]*volume
-    for t in range(nt):
-        for x in range(nx):
-            i = site_index(x,t)     # Function not defined yet !!!!
-            lattice[i].x = x
-            lattice[i].t = t
-            if t%2 ==0:
+    for t_ in range(nt):
+        for x_ in range(nx):
+            i = site_index(x_,t_)     # Function not defined yet !!!!
+            print("Ayush behen ka tatta",i)
+            lattice[i].x = x_
+            lattice[i].t = t_
+            print(lattice[i].x)
+            if t_%2 ==0:
                 lattice[i].sign = 1
             else:
                 lattice[i].sign = -1
-                if (x+t)%2 == 0:
+                if (x_+t_)%2 == 0:
                     lattice[i].parity = EVEN;
                 else:
                     lattice[i].parity = ODD
@@ -214,7 +225,7 @@ def make_lattice():
 def get_f(prompt,variable_name_string):
 
     if prompt == 1:
-        x = double(input(f"enter {variable_name_string}"))
+        x = float(input(f"enter {variable_name_string}"))
         return(x)
 
     else:
@@ -250,20 +261,28 @@ def readin(prompt):
     status = None
     x = None
 
-    g = get_f(prompt,"g")
-    nf = get_i(prompt,"nf")
+#     g = get_f(prompt,"g")
+    g = 0.7
+#     nf = get_i(prompt,"nf")
+    nf = 1
 
-    mdstep = get_i(prompt,"no_of_md_steps")
-    step = get_f(prompt,"step_size")
+#     mdstep = get_i(prompt,"no_of_md_steps")
+    mdstep = 1000
+#     step = get_f(prompt,"step_size")
+    step = 0.1
     print(f"no of md steps = {mdstep}, step size = {step}")
 
-    cgiter1 = get_i(prompt,"max_cg_iterations_for_hamil")
-    cgiter2 = get_i(prompt,"max_cg_iterations_for_piup")
-    printf(f"maximum no. of conj. grad. iterations = {cgiter1},{cgiter2}")
+#     cgiter1 = get_i(prompt,"max_cg_iterations_for_hamil")
+#     cgiter2 = get_i(prompt,"max_cg_iterations_for_piup")
+    cgiter1 = 1000
+    cgiter2 = 1000
+    print(f"maximum no. of conj. grad. iterations = {cgiter1},{cgiter2}")
 
-    residue1=get_f(prompt,"residue_for_cg_hamil");
-    residue2=get_f(prompt,"residue_for_cg_piup");
-    printf(f"residues for conjugate grad = {residue1},{residue2}")
+#     residue1=get_f(prompt,"residue_for_cg_hamil")
+#     residue2=get_f(prompt,"residue_for_cg_piup")
+    residue1 = 1
+    residue2 = 1
+    print(f"residues for conjugate grad = {residue1},{residue2}")
 
 
 def autocorel(sigma_av, lb, a_index):
@@ -770,7 +789,7 @@ def site_index(x,t):
     xr = x%nx
     tr = t%nt
 
-    i = xr + nx + tr
+    i = xr + nx*tr
 
     return i
 
@@ -891,3 +910,8 @@ def gasdev():
    else:
       iset = 0
       return gset
+
+
+def get_lattice():
+    global lattice
+    return lattice
