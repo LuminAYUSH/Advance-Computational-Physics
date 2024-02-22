@@ -148,7 +148,8 @@ def make_lattice():
     global gen_pt
     global T_int
     global T_int_prop
-
+    global neighbor
+    
     i = None
     j = None
     k = None
@@ -182,7 +183,7 @@ def make_lattice():
 
     T_int = [[[None]*no_a_seg]*MAXT_cut]*NOT_cut
     T_int_prop = [[[[None]*no_prop_seg]*nt]*MAXT_cut]*NOT_cut
-
+    neighbor = [[None]*4]*volume
     for t in range(nt):
         for x in range(nx):
             i = site_index(x,t)     # Function not defined yet !!!!
@@ -633,8 +634,6 @@ def propagator():
     lpsi = lpsi / nt
 
     return lpsi
-
-neighbor = [[None]*4]*volume # neighbour stores the index of the neighbouring site in place of the pointer
 
 
 def make_nn_gather():
