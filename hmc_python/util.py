@@ -214,7 +214,7 @@ def make_lattice():
 def get_f(prompt,variable_name_string):
 
     if prompt == 1:
-        x = float(input(f"enter {variable_name_string}"))
+        x = double(input(f"enter {variable_name_string}"))
         return(x)
 
     else:
