@@ -159,7 +159,7 @@ def make_lattice():
     global T_int
     global T_int_prop
     global neighbor
-    
+
     i = None
     j = None
     k = None
@@ -173,34 +173,33 @@ def make_lattice():
     no_prop_seg = int(meas_loop/prop_length)
 
     #All allocations managed by python backend
-    lattice = [site() for i in range(volume)]
-    store = [None]*no_meas
-    conf = [None]*volume
-    con = [None]*volume
-    garbage = [None]*no_garbage
-    ac_store = [None]*meas_loop
-    ac_prop = [None]*prop_length
-    bin_av = [None]*no_bin
-    psi = [None]*no_meas
-    psi_acl = [None]*meas_loop
-    G_prop = [None]*nt
-    G_store = [[None]*no_meas]*nt # This should be nx see the defination using LSIZE
-    G_temp = [[None]*meas_loop]*nt  # This should be nx see the defination using LSIZE
-    prop = [None]*nt
-    tprop = [None]*nt
+    lattice = list(site() for i in range(volume))
+    store = list(None for i in range(no_meas))
+    conf = list(None for i in range(volume))
+    con = list(None for i in range(volume))
+    garbage = list(None for i in range(no_garbage))
+    ac_store = list(None for i in range(meas_loop))
+    ac_prop = list(None for i in range(prop_length))
+    bin_av = list(None for i in range(no_bin))
+    psi = list(None for i in range(no_meas))
+    psi_acl = list(None for i in range(meas_loop))
+    G_prop = list(None for i in range(nt))
+    G_store = list(list(None for i in range(no_meas)) for j in range(nt)) # This should be nx see the defination using LSIZE
+    G_temp = list(list(None for i in range(meas_loop)) for j in range(nt))  # This should be nx see the defination using LSIZE
+    prop = list(None for i in range(nt))
+    tprop = list(None for i in range(nt))
 
-    gen_pt = [None]*volume
+    gen_pt = list(None for i in range(volume))
 
-    T_int = [[[None]*no_a_seg]*MAXT_cut]*NOT_cut
-    T_int_prop = [[[[None]*no_prop_seg]*nt]*MAXT_cut]*NOT_cut
-    neighbor = [[None]*4]*volume
+    T_int = list(list(list(None for i in range(no_a_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut))
+    T_int_prop = list(list(list(None for i in range(no_prop_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut))
+    neighbor = list(list(None for i in range(volume)) for j in range(4))
+
     for t_ in range(nt):
         for x_ in range(nx):
             i = site_index(x_,t_)     # Function not defined yet !!!!
-            print("Ayush behen ka tatta",i)
             lattice[i].x = x_
             lattice[i].t = t_
-            print(lattice[i].x)
             if t_%2 ==0:
                 lattice[i].sign = 1
             else:
@@ -672,11 +671,10 @@ def make_nn_gather():
             j = site_index(xpt,tpt)
             neighbor[dir][i] = j
 
-
 def neighbor_coords(x,t,dir):
     global neighbor
-    xp = None
-    tp = None
+    xp = x
+    tp = t
 
     global nx, nt
 
@@ -687,7 +685,7 @@ def neighbor_coords(x,t,dir):
     if dir == 1:
         tp = (t+1)%nt
     if dir == 2:
-        tp = (t+nt+1)%nt
+        tp = (t+nt-1)%nt
     return xp, tp
 
 
@@ -915,3 +913,9 @@ def gasdev():
 def get_lattice():
     global lattice
     return lattice
+def get_neighbor():
+    global neighbor
+    return neighbor
+def show_neighbor():
+    global neighbor
+    print(np.array(neighbor)[:,17])
