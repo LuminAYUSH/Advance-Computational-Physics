@@ -8,6 +8,7 @@ import os
 import math
 import random
 
+from .lparam import *
 
 class psferm:
     def __init__(self):
@@ -752,8 +753,9 @@ def hmc():
 
 
 def layout():
-    global no_odd_sites, no_even_sites, volume
-
+    global no_odd_sites, no_even_sites
+    global volume
+    print(no_even_sites)
     no_even_sites = volume/2
     no_odd_sites = volume/2
 
