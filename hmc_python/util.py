@@ -1,7 +1,6 @@
 ### Util for the HMC code everything is non-vectorised in this Util
 import numpy as np
 import scipy
-import sklearn as sk
 import matplotlib.pyplot as plt
 import sys
 import os
@@ -12,7 +11,7 @@ from .lparam import *
 
 class psferm:
     def __init__(self):
-        self.f = None # Has to be initialized as a array of size [4]
+        self.f = list(None for i in range(4)) # Has to be initialized as a array of size [4]
 
 
 class site:
@@ -263,7 +262,7 @@ def readin(prompt):
 #     g = get_f(prompt,"g")
     g = 0.7
 #     nf = get_i(prompt,"nf")
-    nf = 1
+    nf = 4
 
 #     mdstep = get_i(prompt,"no_of_md_steps")
     mdstep = 1000
@@ -358,14 +357,14 @@ def cg_md(src,dest,cgiter,residue,cgflag,flavor):
     dsize_src = 0
 
     for i in range(volume):
-        dsize_src += (lattice[i][F_PT(i,src)].f[flavor])**2
+        dsize_src += (lattice[i][src].f[flavor])**2
 
     size_src = math.sqrt(dsize_src)
 
     if cgflag == 0:
         for i in range(volume):
-            lattice[i][F_PT(i,dest)].f[flavor] = 0
-            lattice[i].r = lattice[i][F_PT(i,src)].f[flavor]
+            lattice[i][dest].f[flavor] = 0
+            lattice[i].r = lattice[i][src].f[flavor]
             lattice[i].p = lattice[i].r
 
         dsize_r = 1
@@ -378,7 +377,7 @@ def cg_md(src,dest,cgiter,residue,cgflag,flavor):
         dsize_r = 0
 
         for i in range(volume):
-            lattice[i].r = lattice[i][F_PT(i,src)].f[flavor] - lattice[i].mp
+            lattice[i].r = lattice[i][src].f[flavor] - lattice[i].mp
             dsize_r += (lattice[i].r)**2
             lattice[i].p = lattice[i].r
 
@@ -404,9 +403,9 @@ def cg_md(src,dest,cgiter,residue,cgflag,flavor):
 
         cp = 0
         for i in range(volume):
-            lattice[i][F_PT(i,dest)].f[flavor] += a*lattice[i].p
+            lattice[i][dest].f[flavor] += a*lattice[i].p
             lattice[i].r -= a*lattice[i].mmp
-            cp += (lattice.r)**2
+            cp += (lattice[i].r)**2
 
         b = cp/c
         dsize_r = 0
@@ -437,14 +436,14 @@ def cg_prop(src , dest , cgiter , residue, cgflag):
 
     # Normalisation
     for i in range(volume):
-        dsize_src += lattice[i][F_PT(i,src)]**2
+        dsize_src += lattice[i][src]**2
     size_src = math.sqrt(dsize_src)
 
     # Initial guess
     if cgflag == 0:
         for i in range(volume):
-            lattice[i][F_PT(i,dest)] = 0.0
-            lattice[i].r = lattice[i][F_PT(i,src)]
+            lattice[i][dest] = 0.0
+            lattice[i].r = lattice[i][src]
         dsize_r = 1.0
         size_r = dsize_r
 
@@ -452,7 +451,7 @@ def cg_prop(src , dest , cgiter , residue, cgflag):
         matd2d(dest,"mp",PLUS,EVENANDODD)
         dsize_r = 0.0
         for i in range(volume):
-            lattice[i].r = lattice[i][F_PT(i,src)] - lattice[i].mp
+            lattice[i].r = lattice[i][src] - lattice[i].mp
             dsize_r += (lattice[i].r)**2
         size_r = math.sqrt(dsize_r)/size_src
 
@@ -475,7 +474,7 @@ def cg_prop(src , dest , cgiter , residue, cgflag):
         a = c/d
 
         for i in range(volume):
-            lattice[i][F_PT(i,dest)] += a*lattice[i].p
+            lattice[i][dest] += a*lattice[i].p
             lattice[i].r -= a*lattice[i].mp
 
         matd2d("r","mp",MINUS,EVENANDODD)
@@ -506,22 +505,22 @@ def matd2d(src,dest,isign,parity):
 
     gather(src, XUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] = lattice[i].sign * 0.5 * gen_pt[i]
+        lattice[i][dest] = lattice[i].sign * 0.5 * gen_pt[i]
 
     gather(src, XDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] -= lattice[i].sign * 0.5 * gen_pt[i]
+        lattice[i][dest] -= lattice[i].sign * 0.5 * gen_pt[i]
 
     gather(src, TUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] +=  0.5 * gen_pt[i]
+        lattice[i][dest] +=  0.5 * gen_pt[i]
 
     gather(src, TDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] -=  0.5 * gen_pt[i]
+        lattice[i][dest] -=  0.5 * gen_pt[i]
 
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] = isign*(lattice[i][F_PT(i,dest)]) + (lattice[i].phi)*(lattice[i][F_PT(i,src)])
+        lattice[i][dest] = isign*(lattice[i][dest]) + (lattice[i].phi)*(lattice[i][src])
 
 
 def matd2p(src,dest,isign,parity,flavor):
@@ -532,22 +531,22 @@ def matd2p(src,dest,isign,parity,flavor):
 
     gather(src, XUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] = lattice[i].sign * 0.5 * gen_pt[i]
+        lattice[i][dest].f[flavor] = lattice[i].sign * 0.5 * gen_pt[i]
 
     gather(src, XDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] -= lattice[i].sign * 0.5 * gen_pt[i]
+        lattice[i][dest].f[flavor] -= lattice[i].sign * 0.5 * gen_pt[i]
 
     gather(src, TUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] += 0.5 * gen_pt[i]
+        lattice[i][dest].f[flavor] += 0.5 * gen_pt[i]
 
     gather(src, TDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] -= 0.5 * gen_pt[i]
+        lattice[i][dest].f[flavor] -= 0.5 * gen_pt[i]
 
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] = isign*lattice[i][F_PT(i,dest)].f[flavor] + lattice[i].phi*lattice[i][F_PT(i,src)]
+        lattice[i][dest].f[flavor] = isign*lattice[i][dest].f[flavor] + lattice[i].phi*lattice[i][src]
 
 
 def matp2d(src,dest,isign,parity,flavor):
@@ -558,22 +557,22 @@ def matp2d(src,dest,isign,parity,flavor):
 
     gather(src, XUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] = lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest] = lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
 
     gather(src, XDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] -= lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest] -= lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
 
     gather(src, TUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] += 0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest] += 0.5 * gen_pt[i].f[flavor]
 
     gather(src, TDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] -= 0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest] -= 0.5 * gen_pt[i].f[flavor]
 
     for i in range(volume):
-        lattice[i][F_PT(i,dest)] = isign*lattice[i][F_PT(i,dest)] +lattice[i].phi*lattice[i][F_PT(i,src)].f[flavor]
+        lattice[i][dest] = isign*lattice[i][dest] +lattice[i].phi*lattice[i][src].f[flavor]
 
 
 def matp2p(src,dest,isign,parity,flavor):
@@ -584,22 +583,22 @@ def matp2p(src,dest,isign,parity,flavor):
 
     gather(src, XUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] = lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest].f[flavor] = lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
 
     gather(src, XDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] -= lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest].f[flavor] -= lattice[i].sign * 0.5 * gen_pt[i].f[flavor]
 
     gather(src, TUP, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] +=  0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest].f[flavor] +=  0.5 * gen_pt[i].f[flavor]
 
     gather(src, TDN, EVENANDODD, gen_pt)
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] -=  0.5 * gen_pt[i].f[flavor]
+        lattice[i][dest].f[flavor] -=  0.5 * gen_pt[i].f[flavor]
 
     for i in range(volume):
-        lattice[i][F_PT(i,dest)].f[flavor] = isign*(lattice[i][F_PT(i,dest)].f[flavor]) + (lattice[i].phi)*(lattice[i][F_PT(i,src)].f[flavor])
+        lattice[i][dest].f[flavor] = isign*(lattice[i][dest].f[flavor]) + (lattice[i].phi)*(lattice[i][src].f[flavor])
 
 
 def propagator():
@@ -712,7 +711,7 @@ def gather(field, index, parity, dest):
 
 
 def hmc():
-    global lattice, volume, nf, DELTAMAX, con
+    global lattice, volume, nf, DELTAMAX, con, MINUS, EVENANDODD
 
     i, j, m, n = 0, 0, 0, 0
     hold, hnew, deltah = 0.0, 0.0, 0.0
@@ -725,8 +724,12 @@ def hmc():
         for i in range(volume):
             lattice[i].phi = lattice[i].sigma
             lattice[i].mom = gasdev()
-            for n in range(nf):
-                lattice[i].eta.f[n] = gauss()
+            for n_ in range(nf):
+                lattice[i].eta.f[n_] = gauss()
+
+
+        for n in range(nf):
+            matp2p("eta","chi",MINUS,EVENANDODD,n)
 
         hold = hamil(0,1) # initial value of the Hamiltonian
         piup(step/2) # initial half step
@@ -770,9 +773,8 @@ def hmc():
 
 
 def layout():
-    global no_odd_sites, no_even_sites
-    global volume
-    print(no_even_sites)
+    global no_odd_sites, no_even_sites, volume
+
     no_even_sites = volume/2
     no_odd_sites = volume/2
 
@@ -888,34 +890,168 @@ def piup(t):
 
 
 def ran2():
-      return random.random()
+    return random.random()
+
+def gauss():
+    return np.random.randn()
 
 def gasdev():
-   iset = 0
-   gset = 0.0
+    iset = 0
+    gset = 0.0
 
-   if iset == 0:
-      while True:
+    if iset == 0:
+        while True:
          v1 = (2.0 * ran2()) - 1.0
          v2 = (2.0 * ran2()) - 1.0
          rsq = (v1 * v1) + (v2 * v2)
          if rsq < 1.0 and rsq != 0.0:
             break
-      fac = math.sqrt(-2.0 * math.log(rsq) / rsq)
-      gset = v1 * fac
-      iset = 1
-      return v2 * fac
-   else:
-      iset = 0
-      return gset
-
+        fac = math.sqrt(-2.0 * math.log(rsq) / rsq)
+        gset = v1 * fac
+        iset = 1
+        return v2 * fac
+    else:
+        iset = 0
+        return gset
 
 def get_lattice():
     global lattice
     return lattice
-def get_neighbor():
-    global neighbor
-    return neighbor
-def show_neighbor():
-    global neighbor
-    print(np.array(neighbor)[:,17])
+
+def main():
+    global lattice, sw_flag, garbage, bin_length, no_garbage, ac_store
+    #------------------------------------------------
+    # File IO Defined in the code
+    #------------------------------------------------
+    pin = open("C:/Users/cdipt/Documents/GitHub/Advance-Computational-Physics/hmc_python/sigma1.in","r")
+    ptout = open("C:/Users/cdipt/Documents/GitHub/Advance-Computational-Physics/hmc_python/sigma1.out", "a")
+    ptacl = open("C:/Users/cdipt/Documents/GitHub/Advance-Computational-Physics/hmc_python/sigma1.acl", "a");
+    ptlat = open("C:/Users/cdipt/Documents/GitHub/Advance-Computational-Physics/hmc_python/sigma1.lat", "a");
+    ptprop = open("C:/Users/cdipt/Documents/GitHub/Advance-Computational-Physics/hmc_python/sigma1.prop", "w");
+    ptpropacl = open("C:/Users/cdipt/Documents/GitHub/Advance-Computational-Physics/hmc_python/sigma1.propacl", "w");
+
+    prompt = setup_gn()
+    readin(prompt)
+
+
+    # randomize() # Not defined here but present in the original code
+
+    # filelat(pin) # Getting converted will be merged later
+    coldlat() # <-----------------------------------------------Remove later !!!
+
+    av_sigma = 0.0  # grand average of <sigma>
+    av_psi = 0.0  # grand average of <psi_bar-psi>
+    t_ex_sigma = 0.0  # grand sum over all <sigma>s
+    seg_av_sigma = 0.0  # segment-average of <sigma> for tau_int
+    seg_av_prop = 0.0  # segment-average of <propagator[m]>
+
+    no_hmc = 0  # # of hmc steps calculated
+    no_acc = 0  # # of accepted configurations
+    counter = 0  # counter used in hmc.c
+    meas = 0  # meas is a switch for measurements
+    no_auto = 0  # no_auto is the index for autocoreln. measurement
+    no_prop = 0  # no_prop is the index for Prop-Acl calculation
+
+    a = 0  # a index used in tau_int measurements
+    ac = 0  # ac configuration index to ac_prop[ac]
+    acc = 0  # acc index used in G_temp[][acc] i.e. # of data point and also used as index in ac_store
+    bin = 0  # bin is index to bin_average
+    g = 0  # g configuration index to garbage i.e. garbage[g]
+    k = 0  # k configuration index to store i.e. store[k]
+    j = 0  # j configuration index to store[j], during measurements
+
+    if sw_flag == 0:
+        #  GARBAGE LOOPS AND AUTOCORELATION MEASUREMENTS LOOPS
+        for n in range(hmc_it):
+            no_acc += 1
+            no_hmc += hmc()
+
+            if no_acc<=no_garbage:
+                garbage[g] = average_sigma()
+                g += 1
+                bin +=1
+                if bin%bin_length == 0:
+                    for m in range((g-bin),g):
+                        bin_av[k] +=garbage[m]/bin_length
+                    k += 1
+                    bin = 0
+
+            if no_acc > no_garbage:
+                ac_store[acc] = average_sigma()
+                acc += 1
+                no_auto += 1
+
+                if no_auto % seg_length == 0:
+                    lbd = acc - no_auto
+                    for m in range(lbd, acc):
+                        seg_av_sigma += ac_store[m]/seg_length
+                    autocorel(seg_av_sigma,lbd,a)
+                    a += 1
+                    seg_av_sigma = 0
+                    no_auto = 0
+
+            for i in range(0, volume):
+                con[i] = conf[i]
+            for i in range(0, volume):
+                conf[i] = lattice[i].sigma
+
+        acc_rate = no_acc/no_hmc
+
+        for n in range(0, MAXT_cut):
+            ptacl.write(f"{n+1}")
+            for u in range(NOT_cut):
+                d_t_int = 0
+                av_t_int = 0
+
+                for a in range(no_a_seg):
+                    av_t_int += T_int[u][n][a]/no_a_seg
+                for a in range(no_a_seg):
+                    d_t_int += (T_int[u][n][a] - av_t_int)**2
+
+                d_t_int = math.sqrt(d_t_int/(no_a_seg-1))
+
+                ptacl.write(f"\t{av_t_int}\t{d_t_int}")
+            ptacl.write("\n")
+
+        print(f"\n\n no_acc_traj={no_acc} \t no_hmc={no_hmc} \t acc_rate={acc_rate}")
+
+        for k in range(0,no_bin):
+            ptout.write(f"{k+1}\t{bin_av[k]}\n")
+        for i in range(0,volume):
+            ptlat.write(f"{lattice[i].sigma}\n")
+
+
+
+    if sw_flag == 1:
+        for n in range(meas_loop):
+            no_acc += 1
+            no_hmc += hmc()
+
+            meas = meas + 1
+            no_prop = no_prop + 1
+
+            if meas%meas_length == 0:
+                store[j] += average_sigma()
+                t_ex_sigma += store[j]
+                j += 1
+
+            if meas%prop_length == 0:
+                pass
+
+        av_sigma = t_ex_sigma / no_meas
+        sqdev = 0
+        for k in range(no_meas):
+            sqdev += (store[k]-av_sigma)**2
+        d_av_sigma = sqrt(sqdev/(no_meas-1))
+
+        acc_rate = no_acc/no_hmc
+
+        print(f"\n\n\ no_acc_traj = {no_acc} \t no_hmc = {no_hmc} \t acc_rate = {acc_rate} \n\n")
+        print(f"av_sigma={av_sigma} \t av_psi{av_psi}\n\n")
+        print(f"d_av_sigma={d_av_sigma} \t d_av_psi{d_av_psi}\n\n")
+
+        for i in range(0,volume):
+            ptlat.write(f"{lattice[i].sigma}\n")
+
+    else:
+        print("KILL YOURSELF, PLEASE !!!")

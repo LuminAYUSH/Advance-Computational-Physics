@@ -12,6 +12,10 @@ EVENANDODD = 0x03
 LSIZE = 16   # Change LSIZE to 16/32 accordingly
 DELTAMAX = 50.0
 
+XUP = 0
+TUP = 1
+TDN = 2
+XDN = 3
 # acl parameters for switch = 0
 
 T_cut = 5
