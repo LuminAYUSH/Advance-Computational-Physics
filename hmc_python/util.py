@@ -575,6 +575,7 @@ def matp2d(src,dest,isign,parity,flavor):
         lattice[i][dest] = isign*lattice[i][dest] +lattice[i].phi*lattice[i][src].f[flavor]
 
 
+
 def matp2p(src,dest,isign,parity,flavor):
     i = None
     n = None
@@ -731,6 +732,8 @@ def hmc():
         for n in range(nf):
             matp2p("eta","chi",MINUS,EVENANDODD,n)
 
+
+
         hold = hamil(0,1) # initial value of the Hamiltonian
         piup(step/2) # initial half step
 
@@ -759,12 +762,12 @@ def hmc():
             for m in range(meas_loop):
                 print(f"{ac_store[m]}\n")
 
-            terminate(1)
+            system.exit(1)
         else:
             z = math.exp(-deltah)
 
         count += 1
-
+        print("Jhinga jhinga",count)
     if xx <= z:
         for i in range(volume):
             lattice[i].sigma = lattice[i].phi
@@ -881,11 +884,9 @@ def piup(t):
 
     for n in range(nf):
         cg_md("chi","eta",cgiter2, residue2, 1, n)
+        matp2d("eta","p",PLUS,EVENANDODD,n)
         for i in range(volume):
-            lattice[i].mom -= lattice[i].chi.f[n] * t
-            matp2d("chi","eta",PLUS,EVENANDODD,n)
-            for i in range(volume):
-                lattice[i].mom += (2 * lattice[i].p * lattice[i].eta.f[n] * t)
+            lattice[i].mom += (2 * lattice[i].p * lattice[i].eta.f[n] * t)
 
 
 
