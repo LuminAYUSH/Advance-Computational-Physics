@@ -6,7 +6,7 @@ import sys
 import os
 import math
 import random
-
+from tqdm.auto import tqdm
 from .lparam import *
 
 class psferm:
@@ -265,7 +265,7 @@ def readin(prompt):
     nf = 4
 
 #     mdstep = get_i(prompt,"no_of_md_steps")
-    mdstep = 1000
+    mdstep = 5
 #     step = get_f(prompt,"step_size")
     step = 0.1
     print(f"no of md steps = {mdstep}, step size = {step}")
@@ -712,7 +712,7 @@ def gather(field, index, parity, dest):
 
 
 def hmc():
-    global lattice, volume, nf, DELTAMAX, con, MINUS, EVENANDODD
+    global lattice, volume, nf, DELTAMAX, con, MINUS, EVENANDODD, counter
 
     i, j, m, n = 0, 0, 0, 0
     hold, hnew, deltah = 0.0, 0.0, 0.0
@@ -738,7 +738,7 @@ def hmc():
         piup(step/2) # initial half step
 
         # Leap frog loop for n-1 full steps
-        for j in range(0,mdstep-1):
+        for j in tqdm(range(0,mdstep-1)):
             for i in range(volume):
                 lattice[i].phi += step*lattice[i].mom
                 piup(step)
@@ -767,7 +767,6 @@ def hmc():
             z = math.exp(-deltah)
 
         count += 1
-        print("Jhinga jhinga",count)
     if xx <= z:
         for i in range(volume):
             lattice[i].sigma = lattice[i].phi
@@ -877,7 +876,7 @@ def funnylat():
 
 def piup(t):
     global lattice, volume, g, nf, cgiter2, residue2, PLUS, EVENANDODD
-    print("Piup Calculation. \n")
+    # print("Piup Calculation. \n")
 
     for i in range(volume):
         lattice[i].mom -= ((1/(g*g)) * lattice[i].phi * t)
@@ -1043,7 +1042,7 @@ def main():
         sqdev = 0
         for k in range(no_meas):
             sqdev += (store[k]-av_sigma)**2
-        d_av_sigma = sqrt(sqdev/(no_meas-1))
+        d_av_sigma = math.sqrt(sqdev/(no_meas-1))
 
         acc_rate = no_acc/no_hmc
 
