@@ -1054,4 +1054,4 @@ def main():
             ptlat.write(f"{lattice[i].sigma}\n")
 
     else:
-        print("KILL YOURSELF, PLEASE !!!")
+        print("Fault !!!")
