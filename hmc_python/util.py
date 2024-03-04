@@ -308,13 +308,14 @@ def autocorel(sigma_av, lb, a_index):
 
         #Calculation of tau_int, the integrated autocorrelation time
         for t in range(0, tcut):
-            for k in range(0, t+1): T_int[u][t][a_index] += rho[k]
+            for k in range(0, t+1):
+                T_int[u][t][a_index] += rho[k]
 
         tcut += D_cut
 
 
 def average_sigma():
-    global volume
+    global volume, lattice
     i = None
     av_sigma = None
     t_sigma = None
@@ -381,7 +382,7 @@ def cg_md(src,dest,cgiter,residue,cgflag,flavor):
             dsize_r += (lattice[i].r)**2
             lattice[i].p = lattice[i].r
 
-        size_r = math.sqrt(dsize_r/size_src)
+        size_r = math.sqrt(dsize_r)/size_src
 
     cp = dsize_r
 
@@ -621,7 +622,7 @@ def propagator():
 
     lpsi = 0.0
 
-    tprop = [0.0] * nt
+    tprop = list(0.0 for i in range(nt))
 
     for i in range(volume):
         lattice[i].r = 0.0
@@ -741,9 +742,11 @@ def hmc():
         for j in tqdm(range(0,mdstep-1)):
             for i in range(volume):
                 lattice[i].phi += step*lattice[i].mom
-                piup(step)
+            piup(step)
+
         for i in range(volume):
             lattice[i].phi += step*lattice[i].mom
+
         piup(step/2)
 
         # calculation of new Hamiltonian
