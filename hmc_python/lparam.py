@@ -78,3 +78,7 @@ T_int = None
 T_int_prop = None
 gen_pt = None
 neighbor = None # neighbour stores the index of the neighbouring site in place of the pointer
+
+# These are the static variable defined inside the codebase
+iset = 0
+gset = None

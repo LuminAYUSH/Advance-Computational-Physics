@@ -899,15 +899,14 @@ def gauss():
     return np.random.randn()
 
 def gasdev():
-    iset = 0
-    gset = 0.0
+    global iset, gset
 
     if iset == 0:
         while True:
          v1 = (2.0 * ran2()) - 1.0
          v2 = (2.0 * ran2()) - 1.0
          rsq = (v1 * v1) + (v2 * v2)
-         if rsq < 1.0 and rsq != 0.0:
+         if rsq >= 1.0 or rsq == 0.0:
             break
         fac = math.sqrt(-2.0 * math.log(rsq) / rsq)
         gset = v1 * fac
