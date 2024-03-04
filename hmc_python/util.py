@@ -71,9 +71,9 @@ def initial_set():
         return -1
 
 #     nx = get_i(prompt, "nx")
-    nx = 4
+    nx = 16
 #     nt = get_i(prompt, "nt")
-    nt = 4
+    nt = 16
 
     if nx%2 !=0 and nt%2 !=0:
         print("nx, nt must be even!! \n")
@@ -83,7 +83,7 @@ def initial_set():
 
 #     Switch flag
 #     sw_flag = get_i(prompt,"switch_flag")
-    sw_flag = 0
+    sw_flag = 1
     print(f"Switch_Flag = {sw_flag}\n")
 
 #     Number of measurements
@@ -98,7 +98,7 @@ def initial_set():
 
     # Number of HMC iterations, only accepted ones count
 #     hmc_it = get_i(prompt,"no_of_hmc_iterations")
-    hmc_it = 1000
+    hmc_it = 1100
     print(f"# of hmc iterations = {hmc_it}")
 
     # length after which fermionic observables are measured
@@ -260,7 +260,7 @@ def readin(prompt):
     x = None
 
 #     g = get_f(prompt,"g")
-    g = 0.5
+    g = 0.46
 #     nf = get_i(prompt,"nf")
     nf = 4
 
@@ -903,11 +903,12 @@ def gasdev():
 
     if iset == 0:
         while True:
-         v1 = (2.0 * ran2()) - 1.0
-         v2 = (2.0 * ran2()) - 1.0
-         rsq = (v1 * v1) + (v2 * v2)
-         if rsq >= 1.0 or rsq == 0.0:
-            break
+            v1 = (2.0 * ran2()) - 1.0
+            v2 = (2.0 * ran2()) - 1.0
+            rsq = (v1 * v1) + (v2 * v2)
+            if not (rsq >= 1.0 or rsq == 0.0):
+                break
+
         fac = math.sqrt(-2.0 * math.log(rsq) / rsq)
         gset = v1 * fac
         iset = 1
@@ -921,7 +922,7 @@ def get_lattice():
     return lattice
 
 def main():
-    global lattice, sw_flag, garbage, bin_length, no_garbage, ac_store
+    global lattice, sw_flag, garbage, bin_length, no_garbage, ac_store, store
     #------------------------------------------------
     # File IO Defined in the code
     #------------------------------------------------
@@ -1033,6 +1034,7 @@ def main():
             no_prop = no_prop + 1
 
             if meas%meas_length == 0:
+                print(average_sigma())
                 store[j] += average_sigma()
                 t_ex_sigma += store[j]
                 j += 1
