@@ -71,9 +71,9 @@ def initial_set():
         return -1
 
 #     nx = get_i(prompt, "nx")
-    nx = 16
+    nx = 4
 #     nt = get_i(prompt, "nt")
-    nt = 16
+    nt = 4
 
     if nx%2 !=0 and nt%2 !=0:
         print("nx, nt must be even!! \n")
@@ -88,12 +88,12 @@ def initial_set():
 
 #     Number of measurements
 #     no_garbage = get_i(prompt,"no_of_garbage_loops")
-    no_garbage = 1000
+    no_garbage = 100
     print(f"No of garbage loops = {no_garbage}")
 
     # the length of each bin
 #     bin_length = get_i(prompt,"bin_length")
-    bin_length = 1
+    bin_length = 5
     print(f"bin_length = {bin_length}")
 
     # Number of HMC iterations, only accepted ones count
@@ -103,17 +103,17 @@ def initial_set():
 
     # length after which fermionic observables are measured
 #     meas_length = get_i(prompt,"meas_length")
-    meas_length = 1
+    meas_length = 5
     print(f"meas_length = {meas_length}")
 
     # length after which the propagator autocorrelations are calculated
 #     prop_length = get_i(prompt,"prop_length")
-    prop_length = 1
+    prop_length = 5
     print(f"prop_length = {prop_length}")
 
     # segment length after which autocorrelations are measured
 #     seg_length = get_i(prompt,"seg_length")
-    seg_length = 1
+    seg_length = 100
     print(f"seg_length = {seg_length}")
 
     volume = nx*nt
@@ -260,26 +260,26 @@ def readin(prompt):
     x = None
 
 #     g = get_f(prompt,"g")
-    g = 0.7
+    g = 0.5
 #     nf = get_i(prompt,"nf")
     nf = 4
 
 #     mdstep = get_i(prompt,"no_of_md_steps")
-    mdstep = 5
+    mdstep = 25
 #     step = get_f(prompt,"step_size")
-    step = 0.1
+    step = 0.04
     print(f"no of md steps = {mdstep}, step size = {step}")
 
 #     cgiter1 = get_i(prompt,"max_cg_iterations_for_hamil")
 #     cgiter2 = get_i(prompt,"max_cg_iterations_for_piup")
-    cgiter1 = 1000
-    cgiter2 = 1000
+    cgiter1 = 5000
+    cgiter2 = 2000
     print(f"maximum no. of conj. grad. iterations = {cgiter1},{cgiter2}")
 
 #     residue1=get_f(prompt,"residue_for_cg_hamil")
 #     residue2=get_f(prompt,"residue_for_cg_piup")
-    residue1 = 1
-    residue2 = 1
+    residue1 = 1e-7
+    residue2 = 1e-5
     print(f"residues for conjugate grad = {residue1},{residue2}")
 
 
@@ -302,7 +302,7 @@ def autocorel(sigma_av, lb, a_index):
             ct = 0.0
             for j in range(lb, lb+N_t):
                 ct += ((ac_store[j] - sigma_av) * (ac_store[j+t] - sigma_av))/N_t
-                rho[t-1] += ct/c0
+            rho[t-1] += ct/c0
 
         for t in range(0, tcut): T_int[u][t][a_index] = 0.5
 
@@ -753,7 +753,7 @@ def hmc():
         import random
         xx = random.random()
         deltah = hnew - hold
-
+        print("The new hamil is", hnew)
         if deltah > DELTAMAX:
             print(f"HMC loop {count} REJECTED in CALL {counter} for LARGE DELTAH.\n")
             print("\n Program terminated.\n")

@@ -10,7 +10,7 @@ EVEN = 0x02
 ODD = 0x01
 EVENANDODD = 0x03
 LSIZE = 16   # Change LSIZE to 16/32 accordingly
-DELTAMAX = 50.0
+DELTAMAX = 500.0
 
 XUP = 0
 TUP = 1
