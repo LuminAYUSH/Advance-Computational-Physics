@@ -70,9 +70,9 @@ def initial_set():
         return -1
 
 #     nx = get_i(prompt, "nx")
-    nx = 32
+    nx = 16
 #     nt = get_i(prompt, "nt")
-    nt = 32
+    nt = 16
 
     if nx%2 !=0 and nt%2 !=0:
         print("nx, nt must be even!! \n")
@@ -404,7 +404,7 @@ def cg_md(src,dest,cgiter,residue,cgflag,flavor):
 
 
 def cg_prop(src , dest , cgiter , residue, cgflag):
-    global volume, lattice, PLUS, MINUS, EVENANDODD
+    global volume, lattice, PLUS, MINUS, EVENANDODD, lattice
     N_iter = 0
     size_src = 0.0
     cp = 0.0
@@ -480,7 +480,7 @@ def matd2d(src,dest,isign,parity):
     i = None
     n = None
 
-    global XUP,XDN,TUP,TDN, EVENANDODD, volume
+    global XUP,XDN,TUP,TDN, EVENANDODD, volume, lattice
 
     gather(src, XUP, EVENANDODD, gen_pt)
     lattice[dest][:] = 0.5*lattice.sign[:]*gen_pt[:]
@@ -501,7 +501,7 @@ def matd2p(src,dest,isign,parity,flavor):
     i = None
     n = None
 
-    global volume, XUP, XDN,gen_pt, TDN, TUP, EVENANDODD
+    global volume, XUP, XDN,gen_pt, TDN, TUP, EVENANDODD, lattice
 
     gather(src, XUP, EVENANDODD, gen_pt)
     lattice[dest][i,flavor] = lattice.sign[:] * 0.5 * gen_pt[:]
@@ -522,7 +522,7 @@ def matp2d(src,dest,isign,parity,flavor):
     i = None
     n = None
 
-    global volume, XUP,gen_pt, XDN, TDN, TUP, EVENANDODD
+    global volume, XUP,gen_pt, XDN, TDN, TUP, EVENANDODD, lattice
 
     gather(src, XUP, EVENANDODD, gen_pt)
     lattice[dest][:] = 0.5*lattice.sign[:] * gen_pt[:,flavor]
@@ -544,7 +544,7 @@ def matp2p(src,dest,isign,parity,flavor):
     i = None
     n = None
 
-    global XUP,XDN,TUP,TDN,gen_pt,EVENANDODD, volume
+    global XUP,XDN,TUP,TDN,gen_pt,EVENANDODD, volume, lattice
     gather(src, XUP, EVENANDODD, gen_pt)
     lattice[dest][:,flavor] = lattice.sign[:] * 0.5 * gen_pt[:,flavor]
 
@@ -614,7 +614,7 @@ def propagator():
 
 def make_nn_gather():
     #This will run only once hence not vectorised
-    global neighbor
+    global neighbor, lattice
     i = None
     j = None
     dir = None
@@ -649,7 +649,7 @@ def neighbor_coords(x,t,dir):
 
 
 def gather(field, index, parity, dest):
-    global neighbor
+    global neighbor, lattice
     i = None
     j = None
 
