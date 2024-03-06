@@ -70,9 +70,9 @@ def initial_set():
         return -1
 
 #     nx = get_i(prompt, "nx")
-    nx = 16
+    nx = 32
 #     nt = get_i(prompt, "nt")
-    nt = 16
+    nt = 32
 
     if nx%2 !=0 and nt%2 !=0:
         print("nx, nt must be even!! \n")
@@ -82,7 +82,7 @@ def initial_set():
 
 #     Switch flag
 #     sw_flag = get_i(prompt,"switch_flag")
-    sw_flag = 1
+    sw_flag = 0
     print(f"Switch_Flag = {sw_flag}\n")
 
 #     Number of measurements
@@ -153,10 +153,10 @@ def make_lattice():
     global G_temp
     global prop
     global tprop
-    global gen_pt
     global T_int
     global T_int_prop
     global neighbor
+    global gen_pt
 
     i = None
     j = None
@@ -188,11 +188,10 @@ def make_lattice():
     prop = np.array(list(None for i in range(nt)))
     tprop = np.array(list(None for i in range(nt)))
 
-    gen_pt = np.array(list(None for i in range(volume)))
-
     T_int = np.array(list(list(list(None for i in range(no_a_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut)))
     T_int_prop = np.array(list(list(list(None for i in range(no_prop_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut)))
     neighbor = np.array(list(list(None for i in range(volume)) for j in range(4)))
+    gen_pt = np.array(list(None for i in range(volume))) # Not vectorised for sake of simplicity
 
 #################################################
 #Vectorise Later
@@ -385,8 +384,8 @@ def cg_md(src,dest,cgiter,residue,cgflag,flavor):
         matd2d("mp","mmp",MINUS,EVENANDODD)
 
         cp = 0
-        lattice[dest][:,flavor] = lattice[dest][:,flavor] + a*lattice.p[:,flavor]
-        lattice[r][:] = lattice[r][:] - a*lattice.mmp[:]
+        lattice[dest][:,flavor] = lattice[dest][:,flavor] + a*lattice.p[:]
+        lattice.r[:] = lattice.r[:] - a*lattice.mmp[:]
         cp = np.sum(lattice.r[:]**2)
 
         b = cp/c
@@ -481,7 +480,7 @@ def matd2d(src,dest,isign,parity):
     i = None
     n = None
 
-    global XUP,XDN,TUP,TDN, EVENANDODD, gen_pt, volume
+    global XUP,XDN,TUP,TDN, EVENANDODD, volume
 
     gather(src, XUP, EVENANDODD, gen_pt)
     lattice[dest][:] = 0.5*lattice.sign[:]*gen_pt[:]
@@ -502,7 +501,7 @@ def matd2p(src,dest,isign,parity,flavor):
     i = None
     n = None
 
-    global volume, gen_pt, XUP, XDN, TDN, TUP, EVENANDODD
+    global volume, XUP, XDN,gen_pt, TDN, TUP, EVENANDODD
 
     gather(src, XUP, EVENANDODD, gen_pt)
     lattice[dest][i,flavor] = lattice.sign[:] * 0.5 * gen_pt[:]
@@ -523,21 +522,21 @@ def matp2d(src,dest,isign,parity,flavor):
     i = None
     n = None
 
-    global volume, gen_pt, XUP, XDN, TDN, TUP, EVENANDODD
+    global volume, XUP,gen_pt, XDN, TDN, TUP, EVENANDODD
 
     gather(src, XUP, EVENANDODD, gen_pt)
-    lattice[dest] = 0.5*lattice.sign * gen_pt[:,flavor]
+    lattice[dest][:] = 0.5*lattice.sign[:] * gen_pt[:,flavor]
 
     gather(src, XDN, EVENANDODD, gen_pt)
-    lattice[dest] = lattice[dest] - 0.5 * lattice.sign * gen_pt[:,flavor]
+    lattice[dest][:] = lattice[dest][:] - 0.5 * lattice.sign[:] * gen_pt[:,flavor]
 
     gather(src, TUP, EVENANDODD, gen_pt)
-    lattice[dest] =  lattice[dest] + 0.5 * gen_pt[:,flavor]
+    lattice[dest][:] =  lattice[dest][:] + 0.5 * gen_pt[:,flavor]
 
     gather(src, TDN, EVENANDODD, gen_pt)
-    lattice[dest] = lattice[dest] - 0.5 * gen_pt[:,flavor]
+    lattice[dest][:] = lattice[dest][:] - 0.5 * gen_pt[:,flavor]
 
-    lattice[dest] = isign*lattice[dest] +lattice.phi*lattice[src][:,flavor]
+    lattice[dest][:] = isign*lattice[dest][:] +lattice.phi[:]*lattice[src][:,flavor]
 
 
 
@@ -545,13 +544,12 @@ def matp2p(src,dest,isign,parity,flavor):
     i = None
     n = None
 
-    global XUP,XDN,TUP,TDN, EVENANDODD, gen_pt, volume
-
+    global XUP,XDN,TUP,TDN,gen_pt,EVENANDODD, volume
     gather(src, XUP, EVENANDODD, gen_pt)
-    lattice[dest][:,flavor] = lattice.sign * 0.5 * gen_pt[:,flavor]
+    lattice[dest][:,flavor] = lattice.sign[:] * 0.5 * gen_pt[:,flavor]
 
     gather(src, XDN, EVENANDODD, gen_pt)
-    lattice[dest][:,flavor] -= lattice.sign * 0.5 * gen_pt[:,flavor]
+    lattice[dest][:,flavor] -= lattice.sign[:] * 0.5 * gen_pt[:,flavor]
 
     gather(src, TUP, EVENANDODD, gen_pt)
     lattice[dest][:,flavor] +=  0.5 * gen_pt[:,flavor]
@@ -560,7 +558,8 @@ def matp2p(src,dest,isign,parity,flavor):
     lattice[dest][:,flavor] -=  0.5 * gen_pt[:,flavor]
 
                        
-    lattice[dest][:,flavor] = isign*(lattice[dest][:,flavor]) + (lattice.phi)*(lattice[src][:,flavor])
+    lattice[dest][:,flavor] = isign*(lattice[dest][:,flavor]) + (lattice.phi[:])*(lattice[src][:,flavor])
+    
 
 
 def propagator():
@@ -588,7 +587,7 @@ def propagator():
 
     for t in range(nt):
         source = (t * nx) + mid
-        lattice[source].r = 1.0
+        lattice[source].r[:] = 1.0
 
         cg_prop("r", "mmp", cgiter1, residue1, 0)
 
@@ -601,7 +600,7 @@ def propagator():
             prop[n0] = 0.0
 
             for m in range(xl, xu):
-                prop[n0] += lattice[m].mmp
+                prop[n0] += lattice.mmp[m]
 
             tprop[n0] += prop[n0]
 
@@ -654,7 +653,7 @@ def gather(field, index, parity, dest):
     i = None
     j = None
 
-    global EVEN, ODD, EVENANDODD
+    global EVEN, ODD, EVENANDODD, gen_pt
 
     if parity == EVEN:
         idx = np.where(lattice.parity == EVEN)[0]
@@ -666,7 +665,7 @@ def gather(field, index, parity, dest):
         dest[idx] = lattice[field][neighbor[index,idx]]
                        
     if parity == EVENANDODD:
-        dest = lattice[field][neighbor[index,:]]
+        gen_pt = lattice[field][neighbor[index,:]].copy()
 
 
 def hmc():
@@ -680,7 +679,7 @@ def hmc():
     count = 0
 
     while count < max_count and xx>z:
-        lattice.phi = lattice.sigma
+        lattice.phi[:] = lattice.sigma[:]
         lattice.mom[:] = np.array(list(gasdev() for i in range(volume)))
         lattice.eta[:,:] = np.random.randn(volume,nf)
 
@@ -692,10 +691,10 @@ def hmc():
 
         # Leap frog loop for n-1 full steps
         for j in tqdm(range(0,mdstep-1)):
-            lattice.phi += step*lattice.mom
+            lattice.phi[:] += step*lattice.mom[:]
             piup(step)
 
-        lattice.phi += step*lattice.mom
+        lattice.phi[:] += step*lattice.mom[:]
 
         piup(step/2)
 
@@ -721,7 +720,7 @@ def hmc():
 
         count += 1
     if xx <= z:
-        lattice.sigma = lattice.phi
+        lattice.sigma[:] = lattice.phi[:]
 
     return count
 
@@ -758,7 +757,7 @@ def hamil(hflag, flag):
     if hflag != 0:
         for n in range(nf):
             cg_md("chi","eta",cgiter1, residue1, flag, n)
-            h = np.sum(lattice.chi[:,n] * lattice[i].eta[:,n])
+            h = np.sum(lattice.chi[:,n] * lattice.eta[:,n])
     else:
         for n in range(nf):
             h = np.sum(lattice.eta[:,n] * lattice.eta[:,n])
@@ -823,12 +822,12 @@ def piup(t):
     global lattice, volume, g, nf, cgiter2, residue2, PLUS, EVENANDODD
     # print("Piup Calculation. \n")
 
-    lattice.mom -= ((1/(g*g)) * lattice.phi * t)
+    lattice.mom[:] -= ((1/(g*g)) * lattice.phi[:] * t)
 
     for n in range(nf):
         cg_md("chi","eta",cgiter2, residue2, 1, n)
         matp2d("eta","p",PLUS,EVENANDODD,n)
-        lattice.mom += (2 * lattice.p * lattice.eta[:,n] * t)
+        lattice.mom[:] += (2 * lattice.p[:] * lattice.eta[:,n] * t)
 
 
 
@@ -937,7 +936,7 @@ def main():
                     no_auto = 0
 
             con[:] = conf[:]
-            conf[:] = lattice[:].sigma
+            conf[:] = lattice.sigma[:]
 
         acc_rate = no_acc/no_hmc
 
