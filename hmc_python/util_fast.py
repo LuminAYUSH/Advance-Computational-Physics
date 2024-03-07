@@ -10,8 +10,6 @@ from tqdm.auto import tqdm
 from .lparam import *
 import numpy as np
 
-
-
 class LATTICE:
     def __init__(self,volume_):
         self.x = np.array(list(None for i in range(volume_)))
@@ -70,9 +68,9 @@ def initial_set():
         return -1
 
 #     nx = get_i(prompt, "nx")
-    nx = 16
+    nx = 4
 #     nt = get_i(prompt, "nt")
-    nt = 16
+    nt = 4
 
     if nx%2 !=0 and nt%2 !=0:
         print("nx, nt must be even!! \n")
@@ -397,7 +395,6 @@ def cg_md(src,dest,cgiter,residue,cgflag,flavor):
 
         N_iter = N_iter + 1
 
-
     if size_r > residue:
         print("CG_MD Not Converged")
         system.exit(1)
@@ -471,7 +468,7 @@ def cg_prop(src , dest , cgiter , residue, cgflag):
         dsize_r = np.sum(lattice.r[:]**2)
         size_r = math.sqrt(dsize_r)/size_src
         N_iter += 1
-
+    print("From CG_Prop",N_iter)
     if size_r > residue:
         print("CG_PROP Not Converged")
 
@@ -681,12 +678,13 @@ def hmc():
     while count < max_count and xx>z:
         lattice.phi[:] = lattice.sigma[:]
         lattice.mom[:] = np.array(list(gasdev() for i in range(volume)))
-        lattice.eta[:,:] = np.random.randn(volume,nf)
+        lattice.eta[:,:] = np.array(list(list(gauss() for i in range(nf)) for j in range(volume)))
 
         for n in range(nf):
             matp2p("eta","chi",MINUS,EVENANDODD,n)
 
         hold = hamil(0,1) # initial value of the Hamiltonian
+        print("The initial value of Hamiltonian",hold)
         piup(step/2) # initial half step
 
         # Leap frog loop for n-1 full steps
@@ -752,15 +750,15 @@ def hamil(hflag, flag):
     i,n = 0,0
     h = 0
 
-    h = np.sum(((0.5/(g*g)) * lattice.phi* lattice.phi) + (0.5 * lattice.mom * lattice.mom))
+    h = np.sum(((0.5/(g*g)) * lattice.phi* lattice.phi)) + np.sum((0.5 * lattice.mom * lattice.mom))
 
     if hflag != 0:
         for n in range(nf):
             cg_md("chi","eta",cgiter1, residue1, flag, n)
-            h = np.sum(lattice.chi[:,n] * lattice.eta[:,n])
+            h = h + np.sum(lattice.chi[:,n] * lattice.eta[:,n])
     else:
         for n in range(nf):
-            h = np.sum(lattice.eta[:,n] * lattice.eta[:,n])
+            h = h + np.sum(lattice.eta[:,n] * lattice.eta[:,n])
 
     return h
 
@@ -822,12 +820,12 @@ def piup(t):
     global lattice, volume, g, nf, cgiter2, residue2, PLUS, EVENANDODD
     # print("Piup Calculation. \n")
 
-    lattice.mom[:] -= ((1/(g*g)) * lattice.phi[:] * t)
+    lattice.mom[:] = lattice.mom[:] - ((1/(g*g)) * lattice.phi[:] * t)
 
     for n in range(nf):
         cg_md("chi","eta",cgiter2, residue2, 1, n)
         matp2d("eta","p",PLUS,EVENANDODD,n)
-        lattice.mom[:] += (2 * lattice.p[:] * lattice.eta[:,n] * t)
+        lattice.mom[:] = lattice.mom[:] + (2 * lattice.p[:] * lattice.eta[:,n] * t)
 
 
 
@@ -835,7 +833,23 @@ def ran2():
     return random.random()
 
 def gauss():
-    return np.random.randn()
+    global iset, gset
+
+    if iset == 0:
+        while True:
+            v1 = (2.0 * ran2()) - 1.0
+            v2 = (2.0 * ran2()) - 1.0
+            rsq = (v1 * v1) + (v2 * v2)
+            if not (rsq >= 1.0 or rsq == 0.0):
+                break
+
+        fac = math.sqrt(-1 * math.log(rsq) / rsq)
+        gset = v1 * fac
+        iset = 1
+        return v2 * fac
+    else:
+        iset = 0
+        return gset
 
 def gasdev():
     global iset, gset
@@ -901,7 +915,7 @@ def main():
     ac = 0  # ac configuration index to ac_prop[ac]
     acc = 0  # acc index used in G_temp[][acc] i.e. # of data point and also used as index in ac_store
     bin = 0  # bin is index to bin_average
-    g = 0  # g configuration index to garbage i.e. garbage[g]
+    g_ = 0  # g configuration index to garbage i.e. garbage[g]
     k = 0  # k configuration index to store i.e. store[k]
     j = 0  # j configuration index to store[j], during measurements
 
@@ -912,11 +926,11 @@ def main():
             no_hmc += hmc()
 
             if no_acc<=no_garbage:
-                garbage[g] = average_sigma()
-                g += 1
+                garbage[g_] = average_sigma()
+                g_ += 1
                 bin +=1
                 if bin%bin_length == 0:
-                    for m in range((g-bin),g):
+                    for m in range((g_-bin),g_):
                         bin_av[k] +=garbage[m]/bin_length
                     k += 1
                     bin = 0
