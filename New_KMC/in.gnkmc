@@ -1,0 +1,14 @@
+prompt 0
+nx 16
+nt 16
+num_flavors 4
+coupling 0.54
+step_size 0.05
+noise_parameter 1.5
+kr_trajectory_length 200
+kr_refreshing_steps 2
+measurement_interval 1
+max_cg_iter_for_hamil 2000
+residue_cg_hamil 0.000001
+max_cg_iter_for_piup 1000
+residue_cg_piup 0.0001
