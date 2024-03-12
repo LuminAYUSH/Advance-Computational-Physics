@@ -5,26 +5,130 @@ import matplotlib.pyplot as plt
 import sys
 import os
 import math
-import random
+# import random
 from tqdm.auto import tqdm
-from .lparam import *
 import numpy as np
+import math
+# Init File for the HMC Python package
+PI = math.pi
+COLDLAT = 0
+HOTLAT = 1
+PLUS = 1
+MINUS = -1
+EVEN = 0x02
+ODD = 0x01
+EVENANDODD = 0x03
+LSIZE = 16   # Change LSIZE to 16/32 accordingly
+DELTAMAX = 50.0
+
+XUP = 0
+TUP = 1
+TDN = 2
+XDN = 3
+# acl parameters for switch = 0
+
+T_cut = 5
+D_cut = 5
+MAXT_cut = 25
+NOT_cut = 5
+
+#------------------------------------------------
+#Declared external variables in the header file
+#------------------------------------------------
+
+nx = None
+nt = None
+volume = None
+nf = None
+mdstep = None
+cgiter1 = None
+cgiter2 = None
+# long *iseed # Check this later !!!!
+g = None
+step = None
+residue1 = None
+residue2 = None
+mid = None
+no_even_sites = None
+no_odd_sites = None
+no_garbage = None
+bin_length = None
+no_bin = None
+meas_loop = None
+meas_length = None
+prop_length = None
+no_meas = None
+seg_length = None
+no_a_seg = None
+no_prop_seg = None
+hmc_it = None
+counter = None
+sw_flag = None #flag to switch action between garbage and
+# #                  autocorln. loops and measurement loops.
+# #                  sw_flag = 0 => garbage & autocorln. loop;
+# #                  sw_flag = 1 => measurement loop; */
+
+lattice = None
+store = None
+conf = None
+con = None
+garbage = None
+ac_store = None
+ac_prop = None
+bin_av = None
+psi = None
+psi_acl = None
+G_prop = None
+G_store = None
+G_temp = None
+prop = None
+tprop = None
+T_int = None
+T_int_prop = None
+gen_pt = None
+neighbor = None # neighbour stores the index of the neighbouring site in place of the pointer
+
+#-----------------------
+IM1 = 2147483563
+IM2 = 2147483399
+AM = 1.0 / IM1
+IMM1 = IM1 - 1
+IA1 = 40014
+IA2 = 40692
+IQ1 = 53668
+IQ2 = 52774
+IR1 = 12211
+IR2 = 3791
+NTAB = 32
+NDIV = 1 + IMM1 / NTAB
+EPS = 1.2e-7
+RNMX = 1.0 - EPS
+#-----------------------
+# These are the static variable defined inside the codebase
+iset = 0
+gset = None
+iseed = -772
+iseed2 = 123456789
+iy = 0
+iv = [0] * NTAB
+
+h_delta = []
 
 class LATTICE:
     def __init__(self,volume_):
-        self.x = np.array(list(None for i in range(volume_)))
-        self.t = np.array(list(None for i in range(volume_)))
-        self.sign = np.array(list(None for i in range(volume_)))
-        self.parity = np.array(list(None for i in range(volume_)))
-        self.sigma = np.array(list(None for i in range(volume_)))
-        self.phi = np.array(list(None for i in range(volume_)))
-        self.mom = np.array(list(None for i in range(volume_)))
-        self.chi = np.array(list(list(None for i in range(4)) for j in range(volume_)))
-        self.eta = np.array(list(list(None for i in range(4)) for j in range(volume_)))
-        self.p = np.array(list(None for i in range(volume_)))
-        self.r = np.array(list(None for i in range(volume_)))
-        self.mp = np.array(list(None for i in range(volume_)))
-        self.mmp = np.array(list(None for i in range(volume_)))
+        self.x = np.array(list(0 for i in range(volume_)))
+        self.t = np.array(list(0 for i in range(volume_)))
+        self.sign = np.array(list(0 for i in range(volume_)))
+        self.parity = np.array(list(0 for i in range(volume_)))
+        self.sigma = np.array(list(0.0 for i in range(volume_)))
+        self.phi = np.array(list(0.0 for i in range(volume_)))
+        self.mom = np.array(list(0.0 for i in range(volume_)))
+        self.chi = np.array(list(list(0.0 for i in range(4)) for j in range(volume_)))
+        self.eta = np.array(list(list(0.0 for i in range(4)) for j in range(volume_)))
+        self.p = np.array(list(0.0 for i in range(volume_)))
+        self.r = np.array(list(0.0 for i in range(volume_)))
+        self.mp = np.array(list(0.0 for i in range(volume_)))
+        self.mmp = np.array(list(0.0 for i in range(volume_)))
 
     def __getitem__(self,key):
         return self.__dict__[key]
@@ -68,9 +172,9 @@ def initial_set():
         return -1
 
 #     nx = get_i(prompt, "nx")
-    nx = 4
+    nx = 16
 #     nt = get_i(prompt, "nt")
-    nt = 4
+    nt = 16
 
     if nx%2 !=0 and nt%2 !=0:
         print("nx, nt must be even!! \n")
@@ -171,25 +275,25 @@ def make_lattice():
     #All allocations managed by python backend
     lattice = LATTICE(volume)
     
-    store = np.array(list(None for i in range(no_meas)))
-    conf = np.array(list(None for i in range(volume)))
-    con = np.array(list(None for i in range(volume)))
-    garbage = np.array(list(None for i in range(no_garbage)))
-    ac_store = np.array(list(None for i in range(meas_loop)))
-    ac_prop = np.array(list(None for i in range(prop_length)))
-    bin_av = np.array(list(None for i in range(no_bin)))
-    psi = np.array(list(None for i in range(no_meas)))
-    psi_acl = np.array(list(None for i in range(meas_loop)))
-    G_prop = np.array(list(None for i in range(nt)))
-    G_store = np.array(list(list(None for i in range(no_meas)) for j in range(nt))) # This should be nx see the defination using LSIZE
-    G_temp = np.array(list(list(None for i in range(meas_loop)) for j in range(nt)))  # This should be nx see the defination using LSIZE
-    prop = np.array(list(None for i in range(nt)))
-    tprop = np.array(list(None for i in range(nt)))
+    store = np.array(list(0.0 for i in range(no_meas)))
+    conf = np.array(list(0.0 for i in range(volume)))
+    con = np.array(list(0.0 for i in range(volume)))
+    garbage = np.array(list(0.0 for i in range(no_garbage)))
+    ac_store = np.array(list(0.0 for i in range(meas_loop)))
+    ac_prop = np.array(list(0.0 for i in range(prop_length)))
+    bin_av = np.array(list(0.0 for i in range(no_bin)))
+    psi = np.array(list(0.0 for i in range(no_meas)))
+    psi_acl = np.array(list(0.0 for i in range(meas_loop)))
+    G_prop = np.array(list(0.0 for i in range(nt)))
+    G_store = np.array(list(list(0.0 for i in range(no_meas)) for j in range(nt))) # This should be nx see the defination using LSIZE
+    G_temp = np.array(list(list(0.0 for i in range(meas_loop)) for j in range(nt)))  # This should be nx see the defination using LSIZE
+    prop = np.array(list(0.0 for i in range(nt)))
+    tprop = np.array(list(0.0 for i in range(nt)))
 
-    T_int = np.array(list(list(list(None for i in range(no_a_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut)))
-    T_int_prop = np.array(list(list(list(None for i in range(no_prop_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut)))
-    neighbor = np.array(list(list(None for i in range(volume)) for j in range(4)))
-    gen_pt = np.array(list(None for i in range(volume))) # Not vectorised for sake of simplicity
+    T_int = np.array(list(list(list(0.0 for i in range(no_a_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut)))
+    T_int_prop = np.array(list(list(list(0.0 for i in range(no_prop_seg)) for j in range(MAXT_cut)) for k in range(NOT_cut)))
+    neighbor = np.array(list(list(0.0 for i in range(volume)) for j in range(4)))
+    gen_pt = np.array(list(0.0 for i in range(volume))) # Not vectorised for sake of simplicity
 
 #################################################
 #Vectorise Later
@@ -241,7 +345,8 @@ def get_i(prompt, variable_name_string):
 
 
 def getprompt():
-    prompt = int(input("Enter the prompt type (only 1 is supported for now):"))
+#     prompt = int(input("Enter the prompt type (only 1 is supported for now):"))
+    prompt = 1
     return prompt
 
 
@@ -283,8 +388,8 @@ def readin(prompt):
 
 def autocorel(sigma_av, lb, a_index):
 
-    global T_cut, MAX_Tcut, seg_length, ac_store, NOT_cut, T_int, D_cut
-    rho = np.zeros(MAX_Tcut)
+    global T_cut, MAXT_cut, seg_length, ac_store, NOT_cut, T_int, D_cut
+    rho = np.zeros(MAXT_cut)
 
     c0 = 0.0; N_t = 0; tcut = T_cut
 
@@ -666,7 +771,7 @@ def gather(field, index, parity, dest):
 
 
 def hmc():
-    global lattice, volume, nf, DELTAMAX, con, MINUS, EVENANDODD, counter
+    global lattice, volume, nf, DELTAMAX, con, MINUS, EVENANDODD, counter,h_delta
 
     i, j, m, n = 0, 0, 0, 0
     hold, hnew, deltah = 0.0, 0.0, 0.0
@@ -684,11 +789,11 @@ def hmc():
             matp2p("eta","chi",MINUS,EVENANDODD,n)
 
         hold = hamil(0,1) # initial value of the Hamiltonian
-        print("The initial value of Hamiltonian",hold)
+#         print("The initial value of Hamiltonian",hold)
         piup(step/2) # initial half step
 
         # Leap frog loop for n-1 full steps
-        for j in tqdm(range(0,mdstep-1)):
+        for j in range(0,mdstep-1):
             lattice.phi[:] += step*lattice.mom[:]
             piup(step)
 
@@ -700,10 +805,11 @@ def hmc():
         hnew = hamil(1,1)
 
         # Accept/reject step
-        import random
-        xx = random.random()
+#         import random
+        xx = ran2()
         deltah = hnew - hold
-        print("The new hamil is", hnew)
+        h_delta.append(deltah)
+#         print("The new hamil is", hnew)
         if deltah > DELTAMAX:
             print(f"HMC loop {count} REJECTED in CALL {counter} for LARGE DELTAH.\n")
             print("\n Program terminated.\n")
@@ -829,8 +935,46 @@ def piup(t):
 
 
 
+
 def ran2():
-    return random.random()
+    global iseed, iseed2, iy, iv 
+    j = 0
+    k = 0
+    temp = 0.0
+    
+    if iseed <= 0:
+        if -iseed < 1:
+            iseed = 1
+        else:
+            iseed = -iseed
+            iseed2 = iseed
+            for j in range(NTAB + 7, 0, -1):
+                k = iseed // IQ1
+                iseed = IA1 * (iseed - k * IQ1) - k * IR1
+                if iseed < 0:
+                    iseed += IM1
+                if j < NTAB:
+                    iv[j] = iseed
+            iy = iv[0]
+    
+    k = iseed // IQ1
+    iseed = IA1 * (iseed - k * IQ1) - k * IR1
+    if iseed < 0:
+        iseed += IM1
+    k = iseed2 // IQ2
+    iseed2 = IA2 * (iseed2 - k * IQ2) - k * IR2
+    if iseed2 < 0:
+        iseed2 += IM2
+    j = int(iy // NDIV)
+    iy = iv[j] - iseed2
+    iv[j] = iseed
+    if iy < 1:
+        iy += IMM1
+    if (temp := AM * iy) > RNMX:
+        return RNMX
+    else:
+        return temp
+
 
 def gauss():
     global iset, gset
@@ -873,12 +1017,8 @@ def gasdev():
 def get_lattice():
     global lattice
     return lattice
-def fet_neighbour():
-    global neighbor
-    return neighbor
-
 def main():
-    global lattice, sw_flag, garbage, bin_length, no_garbage, ac_store, store
+    global lattice, sw_flag, garbage, bin_length, no_garbage, ac_store, store, h_delta
     #------------------------------------------------
     # File IO Defined in the code
     #------------------------------------------------
@@ -921,7 +1061,7 @@ def main():
 
     if sw_flag == 0:
         #  GARBAGE LOOPS AND AUTOCORELATION MEASUREMENTS LOOPS
-        for n in range(hmc_it):
+        for n in tqdm(range(hmc_it)):
             no_acc += 1
             no_hmc += hmc()
 
@@ -1013,3 +1153,6 @@ def main():
 
     else:
         print("Fault !!!")
+def ret_h():
+    global h_delta
+    return h_delta
