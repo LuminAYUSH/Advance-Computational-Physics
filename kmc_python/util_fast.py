@@ -154,7 +154,7 @@ def initial_set():
     global Nx
     global Nt
     global N
-    global volume
+    global Volume
 
     prompt = getprompt()
 
@@ -174,37 +174,50 @@ def initial_set():
         print("Nx and Nt must be same, exiting")
         sys.exit()
 
-    volume = Nx*Nt
-    print(f"Lattice dimensions = {nx} {nt}\n")
+    Volume = Nx*Nt
+    print(f"Lattice dimensions = {Nx} {Nt}\n")
 
     return prompt
 
 def readin(prompt):
     global Nf, G, Step, Eps, KRtraj, KRmax, Measlen, CgiterH, ResidueH, CgiterP, ResidueP
-    Nf = get_i(prompt, "num_flavors")
-    G = get_lf(prompt, "coupling")
-    Step = get_lf(prompt, "step_size")
-    Eps = get_lf(prompt, "noise_parameter")
-    KRtraj = get_i(prompt, "kr_trajectory_length")
-    KRmax = get_i(prompt, "kr_refreshing_steps")
-    Measlen = get_i(prompt, "measurement_interval")
-    CgiterH = get_i(prompt, "max_cg_iter_for_hamil")
-    ResidueH = get_lf(prompt, "residue_cg_hamil")
-    CgiterP = get_i(prompt, "max_cg_iter_for_piup")
-    ResidueP = get_lf(prompt, "residue_cg_piup")
+#     Nf = get_i(prompt, "num_flavors")
+#     G = get_lf(prompt, "coupling")
+#     Step = get_lf(prompt, "step_size")
+#     Eps = get_lf(prompt, "noise_parameter")
+#     KRtraj = get_i(prompt, "kr_trajectory_length")
+#     KRmax = get_i(prompt, "kr_refreshing_steps")
+#     Measlen = get_i(prompt, "measurement_interval")
+#     CgiterH = get_i(prompt, "max_cg_iter_for_hamil")
+#     ResidueH = get_lf(prompt, "residue_cg_hamil")
+#     CgiterP = get_i(prompt, "max_cg_iter_for_piup")
+#     ResidueP = get_lf(prompt, "residue_cg_piup")
+
+    Nf = 4
+    G = 0.54
+    Step = 0.05
+    Eps = 1.5
+    KRtraj = 200
+    KRmax = 2
+    Measlen = 1
+    CgiterH = 2000
+    ResidueH = 0.000001
+    CgiterP = 1000
+    ResidueP = 0.0001
 
 def make_lattice():
 
-    global lattice, Volume, Nx
+    global lattice, Volume, Nx, neighbor
 
     lattice = LATTICE(Volume)
+    neighbor = np.array(list(list(0.0 for i in range(volume)) for j in range(4)))
 
-    for t_ in range(nt):
-        for x_ in range(nx):
+    for t_ in range(Nt):
+        for x_ in range(Nx):
             i = site_index(x_,t_)     # Function not defined yet !!!!
             lattice.x[i] = x_
             lattice.t[i] = t_
-            lattice.index[i] = x+Nx*t
+            lattice.index[i] = x_+Nx*t_
             if t_%2 ==0:
                 lattice.sign[i] = 1
             else:
@@ -240,42 +253,6 @@ def getprompt():
 #     prompt = int(input("Enter the prompt type (only 1 is supported for now):"))
     prompt = 1
     return prompt
-
-
-def readin(prompt):
-
-    global g
-    global nf
-    global mdstep
-    global step
-    global cgiter1, cgiter2
-    global residue1, residue2
-
-    status = None
-    x = None
-
-#     g = get_f(prompt,"g")
-    g = 0.46
-#     nf = get_i(prompt,"nf")
-    nf = 4
-
-#     mdstep = get_i(prompt,"no_of_md_steps")
-    mdstep = 25
-#     step = get_f(prompt,"step_size")
-    step = 0.04
-    print(f"no of md steps = {mdstep}, step size = {step}")
-
-#     cgiter1 = get_i(prompt,"max_cg_iterations_for_hamil")
-#     cgiter2 = get_i(prompt,"max_cg_iterations_for_piup")
-    cgiter1 = 5000
-    cgiter2 = 2000
-    print(f"maximum no. of conj. grad. iterations = {cgiter1},{cgiter2}")
-
-#     residue1=get_f(prompt,"residue_for_cg_hamil")
-#     residue2=get_f(prompt,"residue_for_cg_piup")
-    residue1 = 1e-7
-    residue2 = 1e-5
-    print(f"residues for conjugate grad = {residue1},{residue2}")
 
 
 def autocorel(sigma_av, lb, a_index):
@@ -472,28 +449,28 @@ def cg_prop(src , dest , cgiter , residue, cgflag):
         print("CG_PROP Not Converged")
 
 
-def matd2d(src,dest,isign,parity):
+def matd2d(src,dest,isign):
     i = None
     n = None
 
-    global XUP,XDN,TUP,TDN, EVENANDODD, volume, lattice
+    global Xup,Xdn,Tup,Tdn, volume, lattice
 
-    gather(src, XUP, EVENANDODD, gen_pt)
+    gather(src, Xup, gen_pt)
     lattice[dest][:] = 0.5*lattice.sign[:]*gen_pt[:]
 
-    gather(src, XDN, EVENANDODD, gen_pt)
+    gather(src, Xdn, gen_pt)
     lattice[dest][:] = lattice[dest][:] - 0.5*lattice.sign[:] * gen_pt[:]
 
-    gather(src, TUP, EVENANDODD, gen_pt)
+    gather(src, Tup, gen_pt)
     lattice[dest][:] = lattice[dest][:] + 0.5 * gen_pt[:]
 
-    gather(src, TDN, EVENANDODD, gen_pt)
+    gather(src, Tdn, gen_pt)
     lattice[dest][:] = lattice[dest][:] - 0.5 * gen_pt[:]
 
     lattice[dest][:] = isign*(lattice[dest][:]) + (lattice.phi[:])*(lattice[src][:])
 
 
-def matd2p(src, dest, isign, parity, flavor):
+def matd2p(src, dest, isign, flavor):
     i = None
     n = None
 
@@ -514,7 +491,7 @@ def matd2p(src, dest, isign, parity, flavor):
     lattice[dest][:,flavor] = isign*lattice[dest][:,flavor] + lattice.phi[:]*lattice[src][:]
 
 
-def matp2d(src,dest,isign,parity,flavor):
+def matp2d(src,dest,isign,flavor):
 
     global Xup,gen_pt, Xdn, Tdn, Tup, lattice
 
@@ -534,7 +511,7 @@ def matp2d(src,dest,isign,parity,flavor):
 
 
 
-def matp2p(src,dest,isign,parity,flav):
+def matp2p(src,dest,isign,flav):
 
     global Xup, Xdn, Tup, Tdn, gen_pt, lattice
 
@@ -610,16 +587,16 @@ def nn_coords(x,t,dir):
     xp = x
     tp = t
 
-    global nx, nt
+    global Nx, Nt
 
     if dir == 0:
-        xp = (x+1)%nx
+        xp = (x+1)%Nx
     if dir == 3:
-        xp = (x+nx-1)%nx
+        xp = (x+Nx-1)%Nx
     if dir == 1:
-        tp = (t+1)%nt
+        tp = (t+1)%Nt
     if dir == 2:
-        tp = (t+nt-1)%nt
+        tp = (t+Nt-1)%Nt
     return xp, tp
 
 def make_nn_gathers():
@@ -643,7 +620,7 @@ def make_nn_gathers():
     neighbor = neighbor.astype(np.uint16)
 
 
-def gather(field, index, parity, dest):
+def gather(field, index, dest):
 
     global neighbor, lattice
     global gen_pt
@@ -661,7 +638,7 @@ def kramer():
     count = 0
 
     lattice.phi[:] = lattice.sigma[:]
-    lattice.rho[:] = np.random.randn(lattice.rho.shape)
+    lattice.rho[:] = np.random.normal(lattice.rho.shape)
 
     term1 = -1*Eps*Step
     term2 = math.sqrt(1 - math.exp(2*term1))
@@ -702,16 +679,15 @@ def layout():
 
 
 def site_index(x,t):
+    global Nx, Nt
     i = None
     xr = None
     tr = None
 
-    global nx, nt
+    xr = x%Nx
+    tr = t%Nt
 
-    xr = x%nx
-    tr = t%nt
-
-    i = xr + nx*tr
+    i = xr + Nx*tr
 
     return i
 
@@ -794,7 +770,7 @@ def piup(t):
 
     for n in range(Nf):
         congrad("zeta","xi", CgiterP, ResidueP, 1, n)
-        matp2d("xi","omega",n)
+        matp2p("xi","omega",PLUS,n)
         lattice.pi[:] = lattice.pi[:] + (2 * lattice.omega[:, n] * lattice.xi[:, n] * t)
 
 def ran2():
