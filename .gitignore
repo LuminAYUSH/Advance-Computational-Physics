@@ -1,0 +1,8 @@
+
+*.dat
+hmc_python_new/__pycache__/__init__.cpython-38.pyc
+*.pyc
+*.pyc
+/.ipynb_checkpoints
+/kmc_python/__pycache__
+/kmc_python/__pycache__
