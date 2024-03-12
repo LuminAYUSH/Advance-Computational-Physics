@@ -1,0 +1,1812 @@
+GN model with HMC algorithm
+
+Alpha machine, Version 1
+
+type 0 for no prompts, 1 for prompts or 2 for list of prompts
+
+Lattice dimensions = 16 16
+
+ COLDLAT: Cold initial config. of `sigma' field
+Old Hamiltonian = 837.8117801134913
+New Hamiltonian = 837.7997983978023
+DeltaH = -0.011981715688989425
+Accepted!
+Old Hamiltonian = 844.1952645089846
+New Hamiltonian = 844.171095254887
+DeltaH = -0.024169254097614612
+Accepted!
+Kritter = 0, av_sigma = 0.9859218177782366
+Old Hamiltonian = 815.6368384893219
+New Hamiltonian = 815.6480740340718
+DeltaH = 0.011235544749865767
+Accepted!
+Old Hamiltonian = 819.1416102583806
+New Hamiltonian = 819.1549498163903
+DeltaH = 0.01333955800964759
+Accepted!
+Kritter = 1, av_sigma = 0.9801303072485457
+Old Hamiltonian = 830.7290941348406
+New Hamiltonian = 830.7438404339646
+DeltaH = 0.014746299123999052
+Accepted!
+Old Hamiltonian = 826.6491873496514
+New Hamiltonian = 826.6557015759047
+DeltaH = 0.00651422625332998
+Accepted!
+Kritter = 2, av_sigma = 0.9810758055919854
+Old Hamiltonian = 845.9138784308348
+New Hamiltonian = 845.9075899111557
+DeltaH = -0.0062885196790603
+Accepted!
+Old Hamiltonian = 844.8967463634284
+New Hamiltonian = 844.8811324403734
+DeltaH = -0.015613923054957013
+Accepted!
+Kritter = 3, av_sigma = 0.9714120860991953
+Old Hamiltonian = 841.2422237192615
+New Hamiltonian = 841.2498774477671
+DeltaH = 0.0076537285056019755
+Accepted!
+Old Hamiltonian = 832.4793679950802
+New Hamiltonian = 832.4756652775229
+DeltaH = -0.0037027175573030036
+Accepted!
+Kritter = 4, av_sigma = 0.9705686425312665
+Old Hamiltonian = 849.8526452213807
+New Hamiltonian = 849.8439925290895
+DeltaH = -0.008652692291207131
+Accepted!
+Old Hamiltonian = 840.383988324309
+New Hamiltonian = 840.3807481912231
+DeltaH = -0.0032401330859102018
+Accepted!
+Kritter = 5, av_sigma = 0.9616471300523949
+Old Hamiltonian = 888.5456837524329
+New Hamiltonian = 888.5354686379899
+DeltaH = -0.010215114442985396
+Accepted!
+Old Hamiltonian = 888.3801040727133
+New Hamiltonian = 888.4016159572727
+DeltaH = 0.02151188455945885
+Accepted!
+Kritter = 6, av_sigma = 0.9510741655630928
+Old Hamiltonian = 880.7123985940311
+New Hamiltonian = 880.7122053564716
+DeltaH = -0.00019323755952882493
+Accepted!
+Old Hamiltonian = 875.9312884455704
+New Hamiltonian = 875.939695363433
+DeltaH = 0.008406917862544105
+Accepted!
+Kritter = 7, av_sigma = 0.9438420973763084
+Old Hamiltonian = 884.2754455212829
+New Hamiltonian = 884.2555620314754
+DeltaH = -0.019883489807511978
+Accepted!
+Old Hamiltonian = 887.3410286088933
+New Hamiltonian = 887.3208616917188
+DeltaH = -0.020166917174492482
+Accepted!
+Kritter = 8, av_sigma = 0.9335298359377345
+Old Hamiltonian = 847.9408408965267
+New Hamiltonian = 847.9095794266974
+DeltaH = -0.03126146982924638
+Accepted!
+Old Hamiltonian = 842.2092964904813
+New Hamiltonian = 842.1898053647303
+DeltaH = -0.019491125750960236
+Accepted!
+Kritter = 9, av_sigma = 0.9181025627023823
+Old Hamiltonian = 846.3879476625765
+New Hamiltonian = 846.4239976573541
+DeltaH = 0.03604999477761339
+Accepted!
+Old Hamiltonian = 842.2264397421803
+New Hamiltonian = 842.2369092708271
+DeltaH = 0.010469528646808612
+Accepted!
+Kritter = 10, av_sigma = 0.9177971790177876
+Old Hamiltonian = 880.7969821952217
+New Hamiltonian = 880.6912081915582
+DeltaH = -0.10577400366355505
+Accepted!
+Old Hamiltonian = 877.5206240096863
+New Hamiltonian = 877.4844371641072
+DeltaH = -0.03618684557909546
+Accepted!
+Kritter = 11, av_sigma = 0.9142376858221732
+Old Hamiltonian = 858.4693371406607
+New Hamiltonian = 858.4708992130239
+DeltaH = 0.0015620723631855071
+Accepted!
+Old Hamiltonian = 865.865252073769
+New Hamiltonian = 865.867494101719
+DeltaH = 0.00224202794993289
+Accepted!
+Kritter = 12, av_sigma = 0.9102929415561367
+Old Hamiltonian = 878.612566475096
+New Hamiltonian = 878.6076734292609
+DeltaH = -0.004893045835046905
+Accepted!
+Old Hamiltonian = 880.5482560747595
+New Hamiltonian = 880.5163106128148
+DeltaH = -0.03194546194470149
+Accepted!
+Kritter = 13, av_sigma = 0.9051654668303352
+Old Hamiltonian = 855.6951976075123
+New Hamiltonian = 855.7153563899794
+DeltaH = 0.02015878246709235
+Accepted!
+Old Hamiltonian = 855.5063042194793
+New Hamiltonian = 855.4751409036186
+DeltaH = -0.031163315860680996
+Accepted!
+Kritter = 14, av_sigma = 0.8926684919408501
+Old Hamiltonian = 841.6091228633583
+New Hamiltonian = 841.6279344020011
+DeltaH = 0.018811538642808046
+Accepted!
+Old Hamiltonian = 847.0353356847761
+New Hamiltonian = 847.0478629505858
+DeltaH = 0.012527265809694654
+Accepted!
+Kritter = 15, av_sigma = 0.8855580958201633
+Old Hamiltonian = 886.0856270738177
+New Hamiltonian = 886.0235582728335
+DeltaH = -0.06206880098420697
+Accepted!
+Old Hamiltonian = 881.4350892081663
+New Hamiltonian = 881.4055973241229
+DeltaH = -0.0294918840434093
+Accepted!
+Kritter = 16, av_sigma = 0.8759896865688384
+Old Hamiltonian = 885.817801009699
+New Hamiltonian = 885.7420997817321
+DeltaH = -0.07570122796687428
+Accepted!
+Old Hamiltonian = 886.445107620704
+New Hamiltonian = 886.4371813368832
+DeltaH = -0.007926283820779645
+Accepted!
+Kritter = 17, av_sigma = 0.8748859162729936
+Old Hamiltonian = 921.9794242614072
+New Hamiltonian = 921.9281311993918
+DeltaH = -0.0512930620153611
+Accepted!
+Old Hamiltonian = 927.2232036383352
+New Hamiltonian = 927.1408086930365
+DeltaH = -0.08239494529868807
+Accepted!
+Kritter = 18, av_sigma = 0.8755278545792028
+Old Hamiltonian = 864.9392146729706
+New Hamiltonian = 864.9314766313624
+DeltaH = -0.007738041608149615
+Accepted!
+Old Hamiltonian = 861.579068993483
+New Hamiltonian = 861.5468483309953
+DeltaH = -0.03222066248770261
+Accepted!
+Kritter = 19, av_sigma = 0.8729271744849532
+Old Hamiltonian = 870.9048428558317
+New Hamiltonian = 870.9038217094746
+DeltaH = -0.0010211463570612977
+Accepted!
+Old Hamiltonian = 864.6569768995538
+New Hamiltonian = 864.6647460193836
+DeltaH = 0.007769119829845295
+Accepted!
+Kritter = 20, av_sigma = 0.8623792197521853
+Old Hamiltonian = 893.2234556741598
+New Hamiltonian = 893.2231594186402
+DeltaH = -0.00029625551962908503
+Accepted!
+Old Hamiltonian = 894.1695635500745
+New Hamiltonian = 894.1365358289598
+DeltaH = -0.033027721114649466
+Accepted!
+Kritter = 21, av_sigma = 0.8549751374787635
+Old Hamiltonian = 919.5232286589959
+New Hamiltonian = 919.4819995126959
+DeltaH = -0.04122914629999741
+Accepted!
+Old Hamiltonian = 922.9917699674435
+New Hamiltonian = 922.9137927542006
+DeltaH = -0.07797721324288887
+Accepted!
+Kritter = 22, av_sigma = 0.8412611695670664
+Old Hamiltonian = 888.6223686050231
+New Hamiltonian = 888.6393763550298
+DeltaH = 0.017007750006655442
+Accepted!
+Old Hamiltonian = 889.8154743652337
+New Hamiltonian = 889.7319047091687
+DeltaH = -0.08356965606503763
+Accepted!
+Kritter = 23, av_sigma = 0.8363086251906374
+Old Hamiltonian = 910.3259563726156
+New Hamiltonian = 910.3260967356048
+DeltaH = 0.00014036298921382695
+Accepted!
+Old Hamiltonian = 908.1911500449182
+New Hamiltonian = 908.0531473593189
+DeltaH = -0.13800268559930373
+Accepted!
+Kritter = 24, av_sigma = 0.8361292018243177
+Old Hamiltonian = 906.8909386968776
+New Hamiltonian = 906.8646757334196
+DeltaH = -0.026262963457952537
+Accepted!
+Old Hamiltonian = 912.8854513706423
+New Hamiltonian = 912.8652888530089
+DeltaH = -0.020162517633366406
+Accepted!
+Kritter = 25, av_sigma = 0.8313309467436345
+Old Hamiltonian = 856.1865522552177
+New Hamiltonian = 856.1315433843464
+DeltaH = -0.055008870871347426
+Accepted!
+Old Hamiltonian = 842.0302581164759
+New Hamiltonian = 841.6788361012292
+DeltaH = -0.351422015246726
+Accepted!
+Kritter = 26, av_sigma = 0.8225890713187699
+Old Hamiltonian = 843.9665570040524
+New Hamiltonian = 843.9287740867836
+DeltaH = -0.03778291726882799
+Accepted!
+Old Hamiltonian = 844.546254941254
+New Hamiltonian = 844.487915831374
+DeltaH = -0.0583391098799666
+Accepted!
+Kritter = 27, av_sigma = 0.8146665735101787
+Old Hamiltonian = 861.7937158089255
+New Hamiltonian = 861.7483838036941
+DeltaH = -0.04533200523144387
+Accepted!
+Old Hamiltonian = 860.2508991919401
+New Hamiltonian = 860.1987522091272
+DeltaH = -0.0521469828129284
+Accepted!
+Kritter = 28, av_sigma = 0.8132137652990304
+Old Hamiltonian = 883.47896135183
+New Hamiltonian = 883.5048137340124
+DeltaH = 0.02585238218239283
+Accepted!
+Old Hamiltonian = 886.0074288998941
+New Hamiltonian = 886.0006137129263
+DeltaH = -0.006815186967742193
+Accepted!
+Kritter = 29, av_sigma = 0.8135052085932903
+Old Hamiltonian = 885.166817478715
+New Hamiltonian = 885.0000436985725
+DeltaH = -0.16677378014242095
+Accepted!
+Old Hamiltonian = 882.7267333792179
+New Hamiltonian = 882.5800570459651
+DeltaH = -0.14667633325279894
+Accepted!
+Kritter = 30, av_sigma = 0.8119235430146333
+Old Hamiltonian = 867.5266920436842
+New Hamiltonian = 867.4850134071623
+DeltaH = -0.04167863652185133
+Accepted!
+Old Hamiltonian = 864.6870647589321
+New Hamiltonian = 864.6684483785849
+DeltaH = -0.01861638034722546
+Accepted!
+Kritter = 31, av_sigma = 0.8002142935881917
+Old Hamiltonian = 896.0662541777456
+New Hamiltonian = 895.918809063061
+DeltaH = -0.14744511468461496
+Accepted!
+Old Hamiltonian = 888.2523530689183
+New Hamiltonian = 888.1381175443317
+DeltaH = -0.1142355245865474
+Accepted!
+Kritter = 32, av_sigma = 0.8012410259871199
+Old Hamiltonian = 881.6845554883881
+New Hamiltonian = 881.5088617958005
+DeltaH = -0.1756936925876289
+Accepted!
+Old Hamiltonian = 890.2554221337949
+New Hamiltonian = 890.0286220669923
+DeltaH = -0.22680006680263887
+Accepted!
+Kritter = 33, av_sigma = 0.8049005643970195
+Old Hamiltonian = 848.8187026821919
+New Hamiltonian = 848.7332558230659
+DeltaH = -0.0854468591260229
+Accepted!
+Old Hamiltonian = 862.454787524929
+New Hamiltonian = 862.3769428971284
+DeltaH = -0.07784462780057311
+Accepted!
+Kritter = 34, av_sigma = 0.8141052139246261
+Old Hamiltonian = 921.2761800107878
+New Hamiltonian = 921.244372903851
+DeltaH = -0.03180710693686706
+Accepted!
+Old Hamiltonian = 927.9742364927938
+New Hamiltonian = 927.9227502196538
+DeltaH = -0.05148627313997167
+Accepted!
+Kritter = 35, av_sigma = 0.8171034355325623
+Old Hamiltonian = 860.1947629938902
+New Hamiltonian = 860.1261966457151
+DeltaH = -0.06856634817506801
+Accepted!
+Old Hamiltonian = 858.454177538409
+New Hamiltonian = 858.3635518285435
+DeltaH = -0.09062570986554874
+Accepted!
+Kritter = 36, av_sigma = 0.8057943462217303
+Old Hamiltonian = 888.5447622203653
+New Hamiltonian = 888.4571080626484
+DeltaH = -0.08765415771688367
+Accepted!
+Old Hamiltonian = 883.7492566813847
+New Hamiltonian = 883.6207318291405
+DeltaH = -0.12852485224425436
+Accepted!
+Kritter = 37, av_sigma = 0.7847593832200661
+Old Hamiltonian = 831.6554125310802
+New Hamiltonian = 831.6595644443247
+DeltaH = 0.00415191324452735
+Accepted!
+Old Hamiltonian = 839.0584860140035
+New Hamiltonian = 839.0360939047849
+DeltaH = -0.02239210921857193
+Accepted!
+Kritter = 38, av_sigma = 0.7784894254565131
+Old Hamiltonian = 879.7634205123012
+New Hamiltonian = 879.6518397771997
+DeltaH = -0.1115807351014837
+Accepted!
+Old Hamiltonian = 887.232073485072
+New Hamiltonian = 887.129718635162
+DeltaH = -0.10235484990994337
+Accepted!
+Kritter = 39, av_sigma = 0.7701768760242338
+Old Hamiltonian = 855.7744497597928
+New Hamiltonian = 855.7221741075136
+DeltaH = -0.052275652279149654
+Accepted!
+Old Hamiltonian = 858.0773807166104
+New Hamiltonian = 858.0137146243695
+DeltaH = -0.06366609224085096
+Accepted!
+Kritter = 40, av_sigma = 0.7651856789960312
+Old Hamiltonian = 882.891086308171
+New Hamiltonian = 882.8915081366199
+DeltaH = 0.00042182844890703564
+Accepted!
+Old Hamiltonian = 876.8897029497241
+New Hamiltonian = 876.8804555094501
+DeltaH = -0.009247440273952634
+Accepted!
+Kritter = 41, av_sigma = 0.7642535392438925
+Old Hamiltonian = 899.1890910365645
+New Hamiltonian = 899.1494172217397
+DeltaH = -0.03967381482482324
+Accepted!
+Old Hamiltonian = 899.9801773705799
+New Hamiltonian = 898.9646090782529
+DeltaH = -1.015568292326975
+Accepted!
+Kritter = 42, av_sigma = 0.7534773290638639
+Old Hamiltonian = 870.696333193634
+New Hamiltonian = 870.941711159436
+DeltaH = 0.24537796580193572
+Accepted!
+Old Hamiltonian = 862.0263851694652
+New Hamiltonian = 862.025319265382
+DeltaH = -0.001065904083247915
+Accepted!
+Kritter = 43, av_sigma = 0.7462941978632235
+Old Hamiltonian = 837.0246584164912
+New Hamiltonian = 836.9930232211534
+DeltaH = -0.031635195337798905
+Accepted!
+Old Hamiltonian = 842.0808228627159
+New Hamiltonian = 841.9982587802117
+DeltaH = -0.08256408250417735
+Accepted!
+Kritter = 44, av_sigma = 0.7512267977097977
+Old Hamiltonian = 850.7684003070923
+New Hamiltonian = 850.7140553033935
+DeltaH = -0.05434500369881334
+Accepted!
+Old Hamiltonian = 851.2278441693416
+New Hamiltonian = 851.162935563754
+DeltaH = -0.0649086055875614
+Accepted!
+Kritter = 45, av_sigma = 0.753499476459929
+Old Hamiltonian = 879.2775834412446
+New Hamiltonian = 879.2129592400925
+DeltaH = -0.06462420115212808
+Accepted!
+Old Hamiltonian = 869.6649605058858
+New Hamiltonian = 869.5790181948963
+DeltaH = -0.08594231098948057
+Accepted!
+Kritter = 46, av_sigma = 0.7609578834521544
+Old Hamiltonian = 880.2544136123392
+New Hamiltonian = 880.0461047243095
+DeltaH = -0.20830888802970549
+Accepted!
+Old Hamiltonian = 876.4332397029841
+New Hamiltonian = 876.2057748642113
+DeltaH = -0.22746483877278934
+Accepted!
+Kritter = 47, av_sigma = 0.7623130126254011
+Old Hamiltonian = 880.4608356412718
+New Hamiltonian = 880.4064321497096
+DeltaH = -0.054403491562197814
+Accepted!
+Old Hamiltonian = 884.2660176822365
+New Hamiltonian = 884.2276007159852
+DeltaH = -0.038416966251247686
+Accepted!
+Kritter = 48, av_sigma = 0.7544939328550826
+Old Hamiltonian = 882.1532514414249
+New Hamiltonian = 882.0746766732765
+DeltaH = -0.07857476814842812
+Accepted!
+Old Hamiltonian = 881.343918990045
+New Hamiltonian = 881.1818906564241
+DeltaH = -0.16202833362092406
+Accepted!
+Kritter = 49, av_sigma = 0.7544629280854837
+Old Hamiltonian = 866.5370848406233
+New Hamiltonian = 866.4572274155885
+DeltaH = -0.07985742503478832
+Accepted!
+Old Hamiltonian = 863.6964382540932
+New Hamiltonian = 863.6351503736432
+DeltaH = -0.06128788044998146
+Accepted!
+Kritter = 50, av_sigma = 0.7496783366570974
+Old Hamiltonian = 953.9448919840261
+New Hamiltonian = 953.885631166783
+DeltaH = -0.05926081724305732
+Accepted!
+Old Hamiltonian = 945.1652209570832
+New Hamiltonian = 944.2983905493622
+DeltaH = -0.8668304077209541
+Accepted!
+Kritter = 51, av_sigma = 0.7592617708847658
+Old Hamiltonian = 837.9044491641623
+New Hamiltonian = 837.8191030160924
+DeltaH = -0.08534614806990248
+Accepted!
+Old Hamiltonian = 840.537155073004
+New Hamiltonian = 840.472648566704
+DeltaH = -0.06450650629994925
+Accepted!
+Kritter = 52, av_sigma = 0.7625009212218249
+Old Hamiltonian = 860.7814962430413
+New Hamiltonian = 860.7051439474498
+DeltaH = -0.07635229559150503
+Accepted!
+Old Hamiltonian = 863.8291041901863
+New Hamiltonian = 863.7357357045527
+DeltaH = -0.09336848563361855
+Accepted!
+Kritter = 53, av_sigma = 0.7702971105773024
+Old Hamiltonian = 891.2890433544392
+New Hamiltonian = 891.2260529702978
+DeltaH = -0.06299038414135794
+Accepted!
+Old Hamiltonian = 890.5463020705456
+New Hamiltonian = 890.402259867283
+DeltaH = -0.14404220326264294
+Accepted!
+Kritter = 54, av_sigma = 0.762909086417585
+Old Hamiltonian = 824.7575293256176
+New Hamiltonian = 824.7302021211301
+DeltaH = -0.027327204487505696
+Accepted!
+Old Hamiltonian = 823.2473468881237
+New Hamiltonian = 823.189833956008
+DeltaH = -0.05751293211574193
+Accepted!
+Kritter = 55, av_sigma = 0.7618674791403928
+Old Hamiltonian = 874.746357534699
+New Hamiltonian = 874.6471418885185
+DeltaH = -0.09921564618048251
+Accepted!
+Old Hamiltonian = 872.8890860888221
+New Hamiltonian = 872.7688895043578
+DeltaH = -0.12019658446422454
+Accepted!
+Kritter = 56, av_sigma = 0.7645213998886913
+Old Hamiltonian = 875.5129195960319
+New Hamiltonian = 875.4388015061891
+DeltaH = -0.07411808984284107
+Accepted!
+Old Hamiltonian = 880.6149567458226
+New Hamiltonian = 880.5473276160623
+DeltaH = -0.0676291297603484
+Accepted!
+Kritter = 57, av_sigma = 0.7636083372923905
+Old Hamiltonian = 836.769144667972
+New Hamiltonian = 836.6213717682133
+DeltaH = -0.14777289975870644
+Accepted!
+Old Hamiltonian = 837.2512932634808
+New Hamiltonian = 837.1694451594991
+DeltaH = -0.0818481039816561
+Accepted!
+Kritter = 58, av_sigma = 0.7524500780039716
+Old Hamiltonian = 894.2894267935843
+New Hamiltonian = 894.1192689501728
+DeltaH = -0.1701578434115163
+Accepted!
+Old Hamiltonian = 904.9500604467412
+New Hamiltonian = 904.4550461035147
+DeltaH = -0.495014343226444
+Accepted!
+Kritter = 59, av_sigma = 0.757217384452497
+Old Hamiltonian = 881.9814899237138
+New Hamiltonian = 881.8804106183471
+DeltaH = -0.1010793053666248
+Accepted!
+Old Hamiltonian = 884.5167804773065
+New Hamiltonian = 884.3908932353265
+DeltaH = -0.12588724197996726
+Accepted!
+Kritter = 60, av_sigma = 0.7569212973989087
+Old Hamiltonian = 877.9280198844622
+New Hamiltonian = 877.8937528201344
+DeltaH = -0.034267064327764274
+Accepted!
+Old Hamiltonian = 880.7266092864705
+New Hamiltonian = 880.5154949852456
+DeltaH = -0.21111430122493857
+Accepted!
+Kritter = 61, av_sigma = 0.7591120195599095
+Old Hamiltonian = 874.6595192524434
+New Hamiltonian = 874.6249995012101
+DeltaH = -0.034519751233233364
+Accepted!
+Old Hamiltonian = 877.2721875449986
+New Hamiltonian = 877.1672308238547
+DeltaH = -0.10495672114393528
+Accepted!
+Kritter = 62, av_sigma = 0.7566543735307549
+Old Hamiltonian = 857.9989738571129
+New Hamiltonian = 857.9335571150083
+DeltaH = -0.06541674210461679
+Accepted!
+Old Hamiltonian = 860.1850779361685
+New Hamiltonian = 860.127213904625
+DeltaH = -0.05786403154343134
+Accepted!
+Kritter = 63, av_sigma = 0.7687068008328377
+Old Hamiltonian = 843.489712727506
+New Hamiltonian = 843.4287882621844
+DeltaH = -0.060924465321591015
+Accepted!
+Old Hamiltonian = 834.0047924912873
+New Hamiltonian = 833.9065523665721
+DeltaH = -0.09824012471517563
+Accepted!
+Kritter = 64, av_sigma = 0.7750245968119296
+Old Hamiltonian = 891.6248510996728
+New Hamiltonian = 891.5471265182812
+DeltaH = -0.07772458139163518
+Accepted!
+Old Hamiltonian = 892.6218047365512
+New Hamiltonian = 892.5434462513765
+DeltaH = -0.07835848517470367
+Accepted!
+Kritter = 65, av_sigma = 0.7878139779796409
+Old Hamiltonian = 855.2214422880329
+New Hamiltonian = 855.1798474369059
+DeltaH = -0.041594851127001675
+Accepted!
+Old Hamiltonian = 860.636519178315
+New Hamiltonian = 860.546493567007
+DeltaH = -0.09002561130796494
+Accepted!
+Kritter = 66, av_sigma = 0.7802677192057145
+Old Hamiltonian = 851.4750900496294
+New Hamiltonian = 851.4203338356522
+DeltaH = -0.05475621397727082
+Accepted!
+Old Hamiltonian = 858.143770644895
+New Hamiltonian = 858.1174252422109
+DeltaH = -0.02634540268411456
+Accepted!
+Kritter = 67, av_sigma = 0.7806653506888304
+Old Hamiltonian = 894.289765280545
+New Hamiltonian = 894.2931660378918
+DeltaH = 0.0034007573467533803
+Accepted!
+Old Hamiltonian = 899.2448776723702
+New Hamiltonian = 899.2208352475018
+DeltaH = -0.024042424868412127
+Accepted!
+Kritter = 68, av_sigma = 0.7832023433132682
+Old Hamiltonian = 848.2521972437523
+New Hamiltonian = 848.3550744108064
+DeltaH = 0.10287716705408911
+Accepted!
+Old Hamiltonian = 844.6590687161545
+New Hamiltonian = 844.5749127947291
+DeltaH = -0.08415592142534933
+Accepted!
+Kritter = 69, av_sigma = 0.7845014295178886
+Old Hamiltonian = 847.490129132821
+New Hamiltonian = 847.4676643784932
+DeltaH = -0.02246475432787065
+Accepted!
+Old Hamiltonian = 851.3601434822618
+New Hamiltonian = 851.2921827167135
+DeltaH = -0.06796076554837782
+Accepted!
+Kritter = 70, av_sigma = 0.7934824861676903
+Old Hamiltonian = 841.3504528326878
+New Hamiltonian = 841.3609066297173
+DeltaH = 0.010453797029526868
+Accepted!
+Old Hamiltonian = 839.7583175360253
+New Hamiltonian = 839.6342636968121
+DeltaH = -0.12405383921316115
+Accepted!
+Kritter = 71, av_sigma = 0.7863394351210975
+Old Hamiltonian = 880.8369997849354
+New Hamiltonian = 880.7797378651472
+DeltaH = -0.057261919788174964
+Accepted!
+Old Hamiltonian = 882.1403733439894
+New Hamiltonian = 882.0614906355993
+DeltaH = -0.07888270839009692
+Accepted!
+Kritter = 72, av_sigma = 0.7725125523908067
+Old Hamiltonian = 888.5920896578667
+New Hamiltonian = 888.4650532868192
+DeltaH = -0.12703637104755217
+Accepted!
+Old Hamiltonian = 875.843174636956
+New Hamiltonian = 875.6405292752186
+DeltaH = -0.2026453617373818
+Accepted!
+Kritter = 73, av_sigma = 0.7676917590146384
+Old Hamiltonian = 861.2449823328226
+New Hamiltonian = 861.269740260989
+DeltaH = 0.02475792816642297
+Accepted!
+Old Hamiltonian = 857.5242251317502
+New Hamiltonian = 857.4823446083034
+DeltaH = -0.041880523446820916
+Accepted!
+Kritter = 74, av_sigma = 0.7563467010983604
+Old Hamiltonian = 924.9588393948745
+New Hamiltonian = 924.1366003001453
+DeltaH = -0.8222390947291842
+Accepted!
+Old Hamiltonian = 926.0418223872499
+New Hamiltonian = 925.4758224222877
+DeltaH = -0.5659999649622023
+Accepted!
+Kritter = 75, av_sigma = 0.7586338687537182
+Old Hamiltonian = 833.6767446763681
+New Hamiltonian = 833.6977687729994
+DeltaH = 0.02102409663132221
+Accepted!
+Old Hamiltonian = 839.3737579825204
+New Hamiltonian = 839.3337558609866
+DeltaH = -0.04000212153380289
+Accepted!
+Kritter = 76, av_sigma = 0.7617346002190887
+Old Hamiltonian = 817.3958811084165
+New Hamiltonian = 817.3269493534159
+DeltaH = -0.06893175500056259
+Accepted!
+Old Hamiltonian = 824.1209810593496
+New Hamiltonian = 824.0769675117249
+DeltaH = -0.044013547624672356
+Accepted!
+Kritter = 77, av_sigma = 0.7611654171100135
+Old Hamiltonian = 906.8978812094705
+New Hamiltonian = 906.6624402856878
+DeltaH = -0.23544092378267578
+Accepted!
+Old Hamiltonian = 904.6486982256827
+New Hamiltonian = 904.270616302282
+DeltaH = -0.378081923400714
+Accepted!
+Kritter = 78, av_sigma = 0.7599087413795222
+Old Hamiltonian = 937.5072188912874
+New Hamiltonian = 937.4838308496572
+DeltaH = -0.023388041630141743
+Accepted!
+Old Hamiltonian = 938.5370096994301
+New Hamiltonian = 938.4698176337696
+DeltaH = -0.06719206566049252
+Accepted!
+Kritter = 79, av_sigma = 0.7675766652893276
+Old Hamiltonian = 876.9682310147964
+New Hamiltonian = 876.9187443650206
+DeltaH = -0.04948664977575845
+Accepted!
+Old Hamiltonian = 878.9289760340649
+New Hamiltonian = 878.8279389707409
+DeltaH = -0.10103706332404272
+Accepted!
+Kritter = 80, av_sigma = 0.7617725263505262
+Old Hamiltonian = 861.4398166077722
+New Hamiltonian = 861.3420648824174
+DeltaH = -0.09775172535478305
+Accepted!
+Old Hamiltonian = 855.2169925138878
+New Hamiltonian = 855.1478321264381
+DeltaH = -0.06916038744975594
+Accepted!
+Kritter = 81, av_sigma = 0.7445027498523373
+Old Hamiltonian = 869.3205332774346
+New Hamiltonian = 869.4150540246201
+DeltaH = 0.0945207471854701
+Accepted!
+Old Hamiltonian = 868.8616061510163
+New Hamiltonian = 868.78165779696
+DeltaH = -0.07994835405634149
+Accepted!
+Kritter = 82, av_sigma = 0.7376424479108605
+Old Hamiltonian = 905.4911909472555
+New Hamiltonian = 905.2308632844808
+DeltaH = -0.2603276627746709
+Accepted!
+Old Hamiltonian = 906.4910984897997
+New Hamiltonian = 906.3161748375936
+DeltaH = -0.17492365220607553
+Accepted!
+Kritter = 83, av_sigma = 0.7377381885447838
+Old Hamiltonian = 866.4505048046171
+New Hamiltonian = 866.4326864887084
+DeltaH = -0.017818315908698423
+Accepted!
+Old Hamiltonian = 876.9704271428213
+New Hamiltonian = 876.8929595477957
+DeltaH = -0.07746759502560963
+Accepted!
+Kritter = 84, av_sigma = 0.7461693752264323
+Old Hamiltonian = 913.1334831407012
+New Hamiltonian = 913.0327986462637
+DeltaH = -0.1006844944374734
+Accepted!
+Old Hamiltonian = 915.9193255336045
+New Hamiltonian = 915.8257563525024
+DeltaH = -0.09356918110211154
+Accepted!
+Kritter = 85, av_sigma = 0.7306720628239094
+Old Hamiltonian = 861.1650055283748
+New Hamiltonian = 861.1366956593331
+DeltaH = -0.02830986904166366
+Accepted!
+Old Hamiltonian = 864.5948916878897
+New Hamiltonian = 864.5663638364271
+DeltaH = -0.02852785146262704
+Accepted!
+Kritter = 86, av_sigma = 0.7352912382292842
+Old Hamiltonian = 871.578633889816
+New Hamiltonian = 871.5232636964109
+DeltaH = -0.05537019340511051
+Accepted!
+Old Hamiltonian = 866.4753067771624
+New Hamiltonian = 866.3753666328791
+DeltaH = -0.09994014428320952
+Accepted!
+Kritter = 87, av_sigma = 0.7362988219848108
+Old Hamiltonian = 891.8352594874576
+New Hamiltonian = 891.1765144662742
+DeltaH = -0.6587450211834494
+Accepted!
+Old Hamiltonian = 891.507534445329
+New Hamiltonian = 891.4643316364945
+DeltaH = -0.04320280883450778
+Accepted!
+Kritter = 88, av_sigma = 0.7388408240632084
+Old Hamiltonian = 868.7504178742021
+New Hamiltonian = 868.770989066567
+DeltaH = 0.020571192364968738
+Accepted!
+Old Hamiltonian = 870.9123595526372
+New Hamiltonian = 870.8014414868936
+DeltaH = -0.11091806574358998
+Accepted!
+Kritter = 89, av_sigma = 0.7343787212193628
+Old Hamiltonian = 902.2848122183742
+New Hamiltonian = 902.3057571628831
+DeltaH = 0.020944944508869412
+Accepted!
+Old Hamiltonian = 889.601866469054
+New Hamiltonian = 889.4280617575905
+DeltaH = -0.17380471146350374
+Accepted!
+Kritter = 90, av_sigma = 0.7365006576250303
+Old Hamiltonian = 870.610288738482
+New Hamiltonian = 870.5475664541764
+DeltaH = -0.06272228430566429
+Accepted!
+Old Hamiltonian = 876.0638169045378
+New Hamiltonian = 875.8849567900634
+DeltaH = -0.17886011447444616
+Accepted!
+Kritter = 91, av_sigma = 0.7272863529573655
+Old Hamiltonian = 826.1714939901927
+New Hamiltonian = 826.175201345493
+DeltaH = 0.0037073553002073822
+Accepted!
+Old Hamiltonian = 834.3657734736292
+New Hamiltonian = 834.1976121089732
+DeltaH = -0.1681613646560436
+Accepted!
+Kritter = 92, av_sigma = 0.7316590886814417
+Old Hamiltonian = 870.0467268362446
+New Hamiltonian = 869.9083710415001
+DeltaH = -0.13835579474448423
+Accepted!
+Old Hamiltonian = 862.5605971193778
+New Hamiltonian = 862.4392971700667
+DeltaH = -0.12129994931115107
+Accepted!
+Kritter = 93, av_sigma = 0.7325403830743621
+Old Hamiltonian = 900.9696941484348
+New Hamiltonian = 900.774651981943
+DeltaH = -0.19504216649181672
+Accepted!
+Old Hamiltonian = 898.2656432328764
+New Hamiltonian = 898.0642996989761
+DeltaH = -0.20134353390028537
+Accepted!
+Kritter = 94, av_sigma = 0.742028170819026
+Old Hamiltonian = 843.5756626983285
+New Hamiltonian = 843.4287166253052
+DeltaH = -0.14694607302328677
+Accepted!
+Old Hamiltonian = 841.7509764113302
+New Hamiltonian = 841.4964019304774
+DeltaH = -0.2545744808527388
+Accepted!
+Kritter = 95, av_sigma = 0.7323967858822689
+Old Hamiltonian = 884.9551028038076
+New Hamiltonian = 885.0109810972496
+DeltaH = 0.055878293441992355
+Accepted!
+Old Hamiltonian = 890.8899989060945
+New Hamiltonian = 890.8746654652032
+DeltaH = -0.0153334408913679
+Accepted!
+Kritter = 96, av_sigma = 0.7157443658204706
+Old Hamiltonian = 887.770522431382
+New Hamiltonian = 887.6353997198828
+DeltaH = -0.13512271149920707
+Accepted!
+Old Hamiltonian = 896.4878320135576
+New Hamiltonian = 896.3996391311855
+DeltaH = -0.08819288237214096
+Accepted!
+Kritter = 97, av_sigma = 0.7305574242241566
+Old Hamiltonian = 839.6160284263749
+New Hamiltonian = 839.6241058947875
+DeltaH = 0.008077468412579947
+Accepted!
+Old Hamiltonian = 840.2393311957345
+New Hamiltonian = 840.2628816471589
+DeltaH = 0.02355045142439849
+Accepted!
+Kritter = 98, av_sigma = 0.7377225699128338
+Old Hamiltonian = 869.0495215377773
+New Hamiltonian = 869.0778937471962
+DeltaH = 0.028372209418876082
+Accepted!
+Old Hamiltonian = 868.4378412579081
+New Hamiltonian = 868.4422371160019
+DeltaH = 0.004395858093857896
+Accepted!
+Kritter = 99, av_sigma = 0.7375002164176049
+Old Hamiltonian = 841.4762787677927
+New Hamiltonian = 841.4257092815586
+DeltaH = -0.05056948623405333
+Accepted!
+Old Hamiltonian = 840.0470998460223
+New Hamiltonian = 839.8690143034987
+DeltaH = -0.1780855425236041
+Accepted!
+Kritter = 100, av_sigma = 0.7360967074054504
+Old Hamiltonian = 927.0555781794129
+New Hamiltonian = 926.710937815104
+DeltaH = -0.34464036430892975
+Accepted!
+Old Hamiltonian = 926.9127815714012
+New Hamiltonian = 926.6425653369204
+DeltaH = -0.270216234480813
+Accepted!
+Kritter = 101, av_sigma = 0.7395974995727843
+Old Hamiltonian = 853.7481491654535
+New Hamiltonian = 853.8459809764141
+DeltaH = 0.09783181096065618
+Accepted!
+Old Hamiltonian = 846.9914347968999
+New Hamiltonian = 847.0272795097673
+DeltaH = 0.03584471286740154
+Accepted!
+Kritter = 102, av_sigma = 0.7428176814981473
+Old Hamiltonian = 864.3204292267116
+New Hamiltonian = 864.2928686821879
+DeltaH = -0.02756054452368062
+Accepted!
+Old Hamiltonian = 860.6117883842915
+New Hamiltonian = 860.4446581366824
+DeltaH = -0.16713024760906592
+Accepted!
+Kritter = 103, av_sigma = 0.7462982181100255
+Old Hamiltonian = 866.4452784075374
+New Hamiltonian = 866.1159910914307
+DeltaH = -0.3292873161067291
+Accepted!
+Old Hamiltonian = 862.4295814934144
+New Hamiltonian = 862.1987462452352
+DeltaH = -0.23083524817923262
+Accepted!
+Kritter = 104, av_sigma = 0.7445659837679297
+Old Hamiltonian = 866.858003009975
+New Hamiltonian = 866.758648881618
+DeltaH = -0.09935412835704938
+Accepted!
+Old Hamiltonian = 867.4577198897491
+New Hamiltonian = 867.390030371314
+DeltaH = -0.06768951843514515
+Accepted!
+Kritter = 105, av_sigma = 0.7373948828985153
+Old Hamiltonian = 865.8807748981806
+New Hamiltonian = 865.8793935081766
+DeltaH = -0.0013813900039849614
+Accepted!
+Old Hamiltonian = 868.8491897557466
+New Hamiltonian = 868.8269275174416
+DeltaH = -0.0222622383049611
+Accepted!
+Kritter = 106, av_sigma = 0.730354577558445
+Old Hamiltonian = 857.7824229921432
+New Hamiltonian = 857.2741223313994
+DeltaH = -0.508300660743771
+Accepted!
+Old Hamiltonian = 859.2644682850239
+New Hamiltonian = 858.669944432734
+DeltaH = -0.5945238522898535
+Accepted!
+Kritter = 107, av_sigma = 0.7290502795987718
+Old Hamiltonian = 865.4466848881475
+New Hamiltonian = 865.4538436920323
+DeltaH = 0.007158803884749432
+Accepted!
+Old Hamiltonian = 876.3357734789718
+New Hamiltonian = 876.2992528557753
+DeltaH = -0.03652062319645211
+Accepted!
+Kritter = 108, av_sigma = 0.7367478435132457
+Old Hamiltonian = 880.2698868790312
+New Hamiltonian = 880.3325666390433
+DeltaH = 0.06267976001208808
+Accepted!
+Old Hamiltonian = 880.0414371075365
+New Hamiltonian = 879.8783047742218
+DeltaH = -0.16313233331470656
+Accepted!
+Kritter = 109, av_sigma = 0.7258119412891175
+Old Hamiltonian = 896.1096961336472
+New Hamiltonian = 895.8935327369496
+DeltaH = -0.2161633966975387
+Accepted!
+Old Hamiltonian = 896.7260783378969
+New Hamiltonian = 896.1561417643819
+DeltaH = -0.5699365735149513
+Accepted!
+Kritter = 110, av_sigma = 0.7210253619501548
+Old Hamiltonian = 893.1271413400483
+New Hamiltonian = 892.4461095139241
+DeltaH = -0.6810318261242401
+Accepted!
+Old Hamiltonian = 883.5958200027746
+New Hamiltonian = 883.1830366339559
+DeltaH = -0.41278336881873656
+Accepted!
+Kritter = 111, av_sigma = 0.7118626242882825
+Old Hamiltonian = 831.3691272675478
+New Hamiltonian = 831.3291658809329
+DeltaH = -0.039961386614891126
+Accepted!
+Old Hamiltonian = 834.9413040843991
+New Hamiltonian = 834.8332530867378
+DeltaH = -0.10805099766128023
+Accepted!
+Kritter = 112, av_sigma = 0.7103513479645092
+Old Hamiltonian = 875.9408170057807
+New Hamiltonian = 875.8817690499326
+DeltaH = -0.05904795584808653
+Accepted!
+Old Hamiltonian = 872.5752325271816
+New Hamiltonian = 872.4356392041096
+DeltaH = -0.13959332307194927
+Accepted!
+Kritter = 113, av_sigma = 0.7116235858495397
+Old Hamiltonian = 856.1354380741242
+New Hamiltonian = 856.1462318017506
+DeltaH = 0.010793727626378313
+Accepted!
+Old Hamiltonian = 844.7400205154546
+New Hamiltonian = 844.5920544586697
+DeltaH = -0.14796605678486685
+Accepted!
+Kritter = 114, av_sigma = 0.7027984527386992
+Old Hamiltonian = 850.9251046206798
+New Hamiltonian = 850.9363371500301
+DeltaH = 0.01123252935030905
+Accepted!
+Old Hamiltonian = 852.2475887959462
+New Hamiltonian = 852.0448053977672
+DeltaH = -0.20278339817900815
+Accepted!
+Kritter = 115, av_sigma = 0.7062255418887703
+Old Hamiltonian = 901.5778534224128
+New Hamiltonian = 901.4561449591622
+DeltaH = -0.12170846325057028
+Accepted!
+Old Hamiltonian = 895.8265472182602
+New Hamiltonian = 895.7239325777194
+DeltaH = -0.10261464054076441
+Accepted!
+Kritter = 116, av_sigma = 0.711452397041056
+Old Hamiltonian = 859.3871321388552
+New Hamiltonian = 859.296207782547
+DeltaH = -0.09092435630827822
+Accepted!
+Old Hamiltonian = 862.7307265824925
+New Hamiltonian = 862.5691410788888
+DeltaH = -0.16158550360364643
+Accepted!
+Kritter = 117, av_sigma = 0.7101128947392895
+Old Hamiltonian = 844.9730685351542
+New Hamiltonian = 844.9232953203588
+DeltaH = -0.049773214795436616
+Accepted!
+Old Hamiltonian = 845.0935420267361
+New Hamiltonian = 844.9241873533215
+DeltaH = -0.16935467341465937
+Accepted!
+Kritter = 118, av_sigma = 0.7098351052607875
+Old Hamiltonian = 893.0547375405479
+New Hamiltonian = 892.8934915035602
+DeltaH = -0.16124603698767714
+Accepted!
+Old Hamiltonian = 897.6764208917336
+New Hamiltonian = 897.4376869092318
+DeltaH = -0.2387339825017989
+Accepted!
+Kritter = 119, av_sigma = 0.7159613515815939
+Old Hamiltonian = 851.3949976013704
+New Hamiltonian = 851.2620851063691
+DeltaH = -0.13291249500127833
+Accepted!
+Old Hamiltonian = 857.5965118951705
+New Hamiltonian = 857.3996170809024
+DeltaH = -0.19689481426803468
+Accepted!
+Kritter = 120, av_sigma = 0.7164870810722903
+Old Hamiltonian = 876.839917824841
+New Hamiltonian = 876.6332650568359
+DeltaH = -0.2066527680051422
+Accepted!
+Old Hamiltonian = 879.2784286256814
+New Hamiltonian = 879.0372802764989
+DeltaH = -0.24114834918248107
+Accepted!
+Kritter = 121, av_sigma = 0.7179611304139049
+Old Hamiltonian = 877.3121608803608
+New Hamiltonian = 876.9839331073044
+DeltaH = -0.3282277730563692
+Accepted!
+Old Hamiltonian = 881.7393354156018
+New Hamiltonian = 881.1847098143139
+DeltaH = -0.554625601287853
+Accepted!
+Kritter = 122, av_sigma = 0.7159624928048638
+Old Hamiltonian = 893.6982574794206
+New Hamiltonian = 893.7796014131425
+DeltaH = 0.08134393372188242
+Accepted!
+Old Hamiltonian = 893.2953443343408
+New Hamiltonian = 893.273133583841
+DeltaH = -0.022210750499880305
+Accepted!
+Kritter = 123, av_sigma = 0.717102258943082
+Old Hamiltonian = 923.1281840586961
+New Hamiltonian = 922.8290559057739
+DeltaH = -0.29912815292220785
+Accepted!
+Old Hamiltonian = 910.8043836700961
+New Hamiltonian = 910.4279759623814
+DeltaH = -0.37640770771463394
+Accepted!
+Kritter = 124, av_sigma = 0.7252671003721564
+Old Hamiltonian = 864.9849749506618
+New Hamiltonian = 864.8064827852367
+DeltaH = -0.17849216542515478
+Accepted!
+Old Hamiltonian = 862.3297836567197
+New Hamiltonian = 862.1465498145277
+DeltaH = -0.18323384219195304
+Accepted!
+Kritter = 125, av_sigma = 0.7224638641304978
+Old Hamiltonian = 852.4694064009632
+New Hamiltonian = 852.4555907175137
+DeltaH = -0.013815683449479366
+Accepted!
+Old Hamiltonian = 852.1427724131864
+New Hamiltonian = 852.1151598285367
+DeltaH = -0.027612584649773453
+Accepted!
+Kritter = 126, av_sigma = 0.7276436922004281
+Old Hamiltonian = 867.569780502964
+New Hamiltonian = 867.4856738355044
+DeltaH = -0.08410666745965045
+Accepted!
+Old Hamiltonian = 854.9931772594726
+New Hamiltonian = 854.9015386206929
+DeltaH = -0.09163863877972744
+Accepted!
+Kritter = 127, av_sigma = 0.7301241756841266
+Old Hamiltonian = 841.1286997313462
+New Hamiltonian = 841.1831404499776
+DeltaH = 0.05444071863144018
+Accepted!
+Old Hamiltonian = 852.8119148400251
+New Hamiltonian = 852.868157198345
+DeltaH = 0.056242358319877894
+Accepted!
+Kritter = 128, av_sigma = 0.7273880945129538
+Old Hamiltonian = 875.376017410687
+New Hamiltonian = 875.3727563325626
+DeltaH = -0.0032610781244102327
+Accepted!
+Old Hamiltonian = 872.1195152317938
+New Hamiltonian = 871.9976070705388
+DeltaH = -0.1219081612549644
+Accepted!
+Kritter = 129, av_sigma = 0.7317200519312026
+Old Hamiltonian = 910.4958072960889
+New Hamiltonian = 910.4209565586376
+DeltaH = -0.07485073745124282
+Accepted!
+Old Hamiltonian = 909.8724601251765
+New Hamiltonian = 909.7122263065036
+DeltaH = -0.16023381867296393
+Accepted!
+Kritter = 130, av_sigma = 0.7213541837766614
+Old Hamiltonian = 847.970607971524
+New Hamiltonian = 847.923304592414
+DeltaH = -0.047303379110076094
+Accepted!
+Old Hamiltonian = 844.3073590915161
+New Hamiltonian = 844.2801921577181
+DeltaH = -0.027166933797957427
+Accepted!
+Kritter = 131, av_sigma = 0.7421925036207394
+Old Hamiltonian = 838.8946634779928
+New Hamiltonian = 838.8675808241824
+DeltaH = -0.02708265381045294
+Accepted!
+Old Hamiltonian = 831.6172443850164
+New Hamiltonian = 831.6493624702192
+DeltaH = 0.032118085202796465
+Accepted!
+Kritter = 132, av_sigma = 0.7467164191853217
+Old Hamiltonian = 856.2456057907202
+New Hamiltonian = 856.1929745293075
+DeltaH = -0.05263126141267094
+Accepted!
+Old Hamiltonian = 860.5861809855892
+New Hamiltonian = 860.4694117441047
+DeltaH = -0.11676924148446233
+Accepted!
+Kritter = 133, av_sigma = 0.7470743145246341
+Old Hamiltonian = 854.5256542014408
+New Hamiltonian = 854.4211362559078
+DeltaH = -0.10451794553307536
+Accepted!
+Old Hamiltonian = 862.4000656514661
+New Hamiltonian = 862.2880995380428
+DeltaH = -0.11196611342325014
+Accepted!
+Kritter = 134, av_sigma = 0.7418656078397263
+Old Hamiltonian = 875.7125826264286
+New Hamiltonian = 875.6979269213152
+DeltaH = -0.014655705113341355
+Accepted!
+Old Hamiltonian = 868.8891988063871
+New Hamiltonian = 868.8750732685677
+DeltaH = -0.014125537819381861
+Accepted!
+Kritter = 135, av_sigma = 0.7415495037275048
+Old Hamiltonian = 861.9050980532215
+New Hamiltonian = 861.8739299217951
+DeltaH = -0.03116813142639785
+Accepted!
+Old Hamiltonian = 863.3019663650022
+New Hamiltonian = 863.2075250708899
+DeltaH = -0.09444129411224367
+Accepted!
+Kritter = 136, av_sigma = 0.7451144664520428
+Old Hamiltonian = 849.2891440044566
+New Hamiltonian = 849.307714110343
+DeltaH = 0.01857010588639696
+Accepted!
+Old Hamiltonian = 838.4277165340566
+New Hamiltonian = 838.3955164236856
+DeltaH = -0.03220011037092263
+Accepted!
+Kritter = 137, av_sigma = 0.7449691052280694
+Old Hamiltonian = 915.067035726739
+New Hamiltonian = 915.0494422863574
+DeltaH = -0.017593440381688197
+Accepted!
+Old Hamiltonian = 914.3785555461895
+New Hamiltonian = 914.2793258933389
+DeltaH = -0.0992296528506813
+Accepted!
+Kritter = 138, av_sigma = 0.7468973098502614
+Old Hamiltonian = 884.0382280460603
+New Hamiltonian = 884.118863256409
+DeltaH = 0.08063521034864607
+Rejected!
+Old Hamiltonian = 882.0089036738201
+New Hamiltonian = 882.1156868516871
+DeltaH = 0.10678317786698699
+Accepted!
+Kritter = 139, av_sigma = 0.7463364799920382
+Old Hamiltonian = 854.2052864229146
+New Hamiltonian = 853.925310312896
+DeltaH = -0.27997611001853784
+Accepted!
+Old Hamiltonian = 851.3918136045555
+New Hamiltonian = 851.3005338926818
+DeltaH = -0.09127971187376716
+Accepted!
+Kritter = 140, av_sigma = 0.7434167174938491
+Old Hamiltonian = 850.8194350391716
+New Hamiltonian = 850.6767143363402
+DeltaH = -0.14272070283141147
+Accepted!
+Old Hamiltonian = 854.3795449161846
+New Hamiltonian = 854.2379284417685
+DeltaH = -0.14161647441608238
+Accepted!
+Kritter = 141, av_sigma = 0.7427042962589412
+Old Hamiltonian = 873.5138994153501
+New Hamiltonian = 873.5584757712805
+DeltaH = 0.04457635593041687
+Accepted!
+Old Hamiltonian = 877.9134121862588
+New Hamiltonian = 877.607093259933
+DeltaH = -0.3063189263258437
+Accepted!
+Kritter = 142, av_sigma = 0.7360269452058477
+Old Hamiltonian = 902.1190893885431
+New Hamiltonian = 902.0879176535774
+DeltaH = -0.03117173496571013
+Accepted!
+Old Hamiltonian = 897.0370246531821
+New Hamiltonian = 896.9501607918359
+DeltaH = -0.08686386134627355
+Accepted!
+Kritter = 143, av_sigma = 0.7352062602900814
+Old Hamiltonian = 904.5430686464312
+New Hamiltonian = 904.478627676448
+DeltaH = -0.06444096998313853
+Accepted!
+Old Hamiltonian = 899.4692515154943
+New Hamiltonian = 899.3716141910014
+DeltaH = -0.09763732449289364
+Accepted!
+Kritter = 144, av_sigma = 0.7334962929555909
+Old Hamiltonian = 890.4677333990281
+New Hamiltonian = 890.4326292714102
+DeltaH = -0.03510412761795578
+Accepted!
+Old Hamiltonian = 895.8912031286325
+New Hamiltonian = 895.920218002687
+DeltaH = 0.02901487405449643
+Accepted!
+Kritter = 145, av_sigma = 0.7390966823910077
+Old Hamiltonian = 918.1513943519784
+New Hamiltonian = 918.0283708040905
+DeltaH = -0.12302354788789671
+Accepted!
+Old Hamiltonian = 912.7578842525683
+New Hamiltonian = 912.6095909882519
+DeltaH = -0.14829326431640766
+Accepted!
+Kritter = 146, av_sigma = 0.7420072102635781
+Old Hamiltonian = 890.4323735324729
+New Hamiltonian = 890.3911281552791
+DeltaH = -0.041245377193718014
+Accepted!
+Old Hamiltonian = 895.4387701715398
+New Hamiltonian = 895.3878145641409
+DeltaH = -0.0509556073989188
+Accepted!
+Kritter = 147, av_sigma = 0.745334021971948
+Old Hamiltonian = 873.8477293348094
+New Hamiltonian = 873.9110413922741
+DeltaH = 0.06331205746471369
+Accepted!
+Old Hamiltonian = 881.7752626730364
+New Hamiltonian = 881.779610307316
+DeltaH = 0.004347634279611157
+Accepted!
+Kritter = 148, av_sigma = 0.7396943488295226
+Old Hamiltonian = 920.4650102605394
+New Hamiltonian = 920.3187271505196
+DeltaH = -0.14628311001979455
+Accepted!
+Old Hamiltonian = 919.0949901483386
+New Hamiltonian = 918.8825513880797
+DeltaH = -0.2124387602589195
+Accepted!
+Kritter = 149, av_sigma = 0.7385100560572301
+Old Hamiltonian = 908.4880627875054
+New Hamiltonian = 908.4318219101038
+DeltaH = -0.056240877401592115
+Accepted!
+Old Hamiltonian = 908.8636754305965
+New Hamiltonian = 908.7063674457013
+DeltaH = -0.15730798489516928
+Accepted!
+Kritter = 150, av_sigma = 0.7351362660512875
+Old Hamiltonian = 864.6216996912233
+New Hamiltonian = 864.5483452535581
+DeltaH = -0.07335443766521621
+Accepted!
+Old Hamiltonian = 858.9189495719389
+New Hamiltonian = 858.8088761565222
+DeltaH = -0.11007341541676396
+Accepted!
+Kritter = 151, av_sigma = 0.727296060849573
+Old Hamiltonian = 852.3108603180699
+New Hamiltonian = 852.2410070396958
+DeltaH = -0.0698532783741257
+Accepted!
+Old Hamiltonian = 843.3310223774824
+New Hamiltonian = 843.2450712986811
+DeltaH = -0.0859510788013722
+Accepted!
+Kritter = 152, av_sigma = 0.721675308572019
+Old Hamiltonian = 858.8906318773851
+New Hamiltonian = 858.9295532291333
+DeltaH = 0.03892135174817213
+Accepted!
+Old Hamiltonian = 861.0333533711961
+New Hamiltonian = 861.0000391511365
+DeltaH = -0.03331422005953755
+Accepted!
+Kritter = 153, av_sigma = 0.7179547383193703
+Old Hamiltonian = 889.8317087948036
+New Hamiltonian = 889.5340845008536
+DeltaH = -0.2976242939499798
+Accepted!
+Old Hamiltonian = 887.7583347896885
+New Hamiltonian = 887.2946707989765
+DeltaH = -0.46366399071200703
+Accepted!
+Kritter = 154, av_sigma = 0.7307919628896751
+Old Hamiltonian = 867.2808898807929
+New Hamiltonian = 866.9616062297541
+DeltaH = -0.3192836510387451
+Accepted!
+Old Hamiltonian = 855.7549819217353
+New Hamiltonian = 855.4848969754077
+DeltaH = -0.2700849463276427
+Accepted!
+Kritter = 155, av_sigma = 0.7305103534021025
+Old Hamiltonian = 909.3937855562235
+New Hamiltonian = 908.8150490199411
+DeltaH = -0.578736536282463
+Accepted!
+Old Hamiltonian = 921.8033963567974
+New Hamiltonian = 921.4267048176681
+DeltaH = -0.37669153912929687
+Accepted!
+Kritter = 156, av_sigma = 0.740220605070254
+Old Hamiltonian = 862.5858172690588
+New Hamiltonian = 862.533330106741
+DeltaH = -0.052487162317788716
+Accepted!
+Old Hamiltonian = 858.5082247707917
+New Hamiltonian = 858.4501799062675
+DeltaH = -0.05804486452416313
+Accepted!
+Kritter = 157, av_sigma = 0.7301277320568882
+Old Hamiltonian = 887.2552125541041
+New Hamiltonian = 887.2299278611529
+DeltaH = -0.02528469295123159
+Accepted!
+Old Hamiltonian = 895.5234811607402
+New Hamiltonian = 895.4010994321485
+DeltaH = -0.12238172859167662
+Accepted!
+Kritter = 158, av_sigma = 0.7273145261121992
+Old Hamiltonian = 882.2872030220426
+New Hamiltonian = 881.6392609531649
+DeltaH = -0.6479420688776827
+Accepted!
+Old Hamiltonian = 885.5063017781738
+New Hamiltonian = 885.2022808151706
+DeltaH = -0.30402096300315407
+Accepted!
+Kritter = 159, av_sigma = 0.728851373006218
+Old Hamiltonian = 861.2662933650596
+New Hamiltonian = 861.2645955258938
+DeltaH = -0.0016978391657858083
+Accepted!
+Old Hamiltonian = 865.3393439600061
+New Hamiltonian = 865.1033473749851
+DeltaH = -0.23599658502098464
+Accepted!
+Kritter = 160, av_sigma = 0.7347651929167751
+Old Hamiltonian = 883.22004839284
+New Hamiltonian = 883.1606911326755
+DeltaH = -0.05935726016446097
+Accepted!
+Old Hamiltonian = 872.7719901144892
+New Hamiltonian = 872.5201669259144
+DeltaH = -0.2518231885748037
+Accepted!
+Kritter = 161, av_sigma = 0.7393900814139204
+Old Hamiltonian = 896.1100372271837
+New Hamiltonian = 896.2003508771157
+DeltaH = 0.09031364993199986
+Accepted!
+Old Hamiltonian = 895.515943680787
+New Hamiltonian = 895.3671531579266
+DeltaH = -0.14879052286039496
+Accepted!
+Kritter = 162, av_sigma = 0.7440885828275312
+Old Hamiltonian = 852.9622425881843
+New Hamiltonian = 852.9236465155329
+DeltaH = -0.03859607265133036
+Accepted!
+Old Hamiltonian = 847.7627910494971
+New Hamiltonian = 847.6701909718291
+DeltaH = -0.09260007766795297
+Accepted!
+Kritter = 163, av_sigma = 0.7377906005447532
+Old Hamiltonian = 852.6804455310203
+New Hamiltonian = 852.6426195245858
+DeltaH = -0.037826006434443116
+Accepted!
+Old Hamiltonian = 854.1745334540244
+New Hamiltonian = 854.1248584264208
+DeltaH = -0.04967502760359821
+Accepted!
+Kritter = 164, av_sigma = 0.7444431932131701
+Old Hamiltonian = 913.5195932564748
+New Hamiltonian = 913.5283386072489
+DeltaH = 0.008745350774120197
+Accepted!
+Old Hamiltonian = 906.3116025958099
+New Hamiltonian = 906.0465505938004
+DeltaH = -0.2650520020094973
+Accepted!
+Kritter = 165, av_sigma = 0.7449111881906906
+Old Hamiltonian = 855.3807075684582
+New Hamiltonian = 855.3492004293579
+DeltaH = -0.031507139100313
+Accepted!
+Old Hamiltonian = 863.1567610316303
+New Hamiltonian = 863.174557844817
+DeltaH = 0.017796813186691907
+Accepted!
+Kritter = 166, av_sigma = 0.7350638649479133
+Old Hamiltonian = 908.6909870929586
+New Hamiltonian = 908.5413811635677
+DeltaH = -0.14960592939087292
+Accepted!
+Old Hamiltonian = 912.0796559553681
+New Hamiltonian = 911.8248486042856
+DeltaH = -0.25480735108249064
+Accepted!
+Kritter = 167, av_sigma = 0.739853865889553
+Old Hamiltonian = 868.2062234239427
+New Hamiltonian = 867.799585063888
+DeltaH = -0.40663836005467147
+Accepted!
+Old Hamiltonian = 864.0640162741055
+New Hamiltonian = 863.7432368972746
+DeltaH = -0.320779376830842
+Accepted!
+Kritter = 168, av_sigma = 0.7478508863477045
+Old Hamiltonian = 887.5740504019144
+New Hamiltonian = 887.7852006089385
+DeltaH = 0.21115020702404763
+Accepted!
+Old Hamiltonian = 880.8402599802184
+New Hamiltonian = 880.616958283395
+DeltaH = -0.22330169682345513
+Accepted!
+Kritter = 169, av_sigma = 0.7554249273932898
+Old Hamiltonian = 905.7992750485789
+New Hamiltonian = 905.6947513504078
+DeltaH = -0.10452369817107865
+Accepted!
+Old Hamiltonian = 918.3918969286024
+New Hamiltonian = 918.2978843149044
+DeltaH = -0.09401261369794156
+Accepted!
+Kritter = 170, av_sigma = 0.7547534143371637
+Old Hamiltonian = 852.6042007204832
+New Hamiltonian = 852.5497177942402
+DeltaH = -0.054482926242940266
+Accepted!
+Old Hamiltonian = 854.4159475963056
+New Hamiltonian = 854.3648903623251
+DeltaH = -0.05105723398048667
+Accepted!
+Kritter = 171, av_sigma = 0.7523690879144036
+Old Hamiltonian = 854.1207847562066
+New Hamiltonian = 854.0225129681451
+DeltaH = -0.09827178806153825
+Accepted!
+Old Hamiltonian = 855.6542180950463
+New Hamiltonian = 855.4788902061609
+DeltaH = -0.17532788888536288
+Accepted!
+Kritter = 172, av_sigma = 0.749465436200403
+Old Hamiltonian = 872.5148238840769
+New Hamiltonian = 872.3047833347656
+DeltaH = -0.21004054931131577
+Accepted!
+Old Hamiltonian = 869.4268600008244
+New Hamiltonian = 869.0511069255281
+DeltaH = -0.3757530752963021
+Accepted!
+Kritter = 173, av_sigma = 0.7440334864256426
+Old Hamiltonian = 883.0442747098498
+New Hamiltonian = 882.9614140670499
+DeltaH = -0.08286064279991479
+Accepted!
+Old Hamiltonian = 880.4050524800427
+New Hamiltonian = 880.3224178602532
+DeltaH = -0.0826346197895873
+Accepted!
+Kritter = 174, av_sigma = 0.7390034139552113
+Old Hamiltonian = 909.9180519192378
+New Hamiltonian = 909.7241108217098
+DeltaH = -0.1939410975279543
+Accepted!
+Old Hamiltonian = 901.2050404341743
+New Hamiltonian = 901.0309047318469
+DeltaH = -0.1741357023273622
+Accepted!
+Kritter = 175, av_sigma = 0.7323284990477131
+Old Hamiltonian = 868.7280633218085
+New Hamiltonian = 868.7033988258387
+DeltaH = -0.02466449596977327
+Accepted!
+Old Hamiltonian = 881.4507739445502
+New Hamiltonian = 881.3569367080461
+DeltaH = -0.09383723650410047
+Accepted!
+Kritter = 176, av_sigma = 0.7351957202025358
+Old Hamiltonian = 872.3342522130475
+New Hamiltonian = 872.2374878953041
+DeltaH = -0.09676431774346383
+Accepted!
+Old Hamiltonian = 872.8250242855928
+New Hamiltonian = 872.6890661972859
+DeltaH = -0.13595808830689293
+Accepted!
+Kritter = 177, av_sigma = 0.7474192795495709
+Old Hamiltonian = 909.5178482505673
+New Hamiltonian = 909.5438821488528
+DeltaH = 0.02603389828550462
+Accepted!
+Old Hamiltonian = 911.9674605041798
+New Hamiltonian = 911.8863434875711
+DeltaH = -0.08111701660868675
+Accepted!
+Kritter = 178, av_sigma = 0.7486224742298344
+Old Hamiltonian = 866.2886136013633
+New Hamiltonian = 866.211537740538
+DeltaH = -0.07707586082528906
+Accepted!
+Old Hamiltonian = 869.795831149454
+New Hamiltonian = 869.5185369182018
+DeltaH = -0.2772942312521991
+Accepted!
+Kritter = 179, av_sigma = 0.7437292181293892
+Old Hamiltonian = 888.1097908559134
+New Hamiltonian = 887.787639399143
+DeltaH = -0.3221514567703707
+Accepted!
+Old Hamiltonian = 879.0300052900432
+New Hamiltonian = 878.8321444279743
+DeltaH = -0.19786086206886466
+Accepted!
+Kritter = 180, av_sigma = 0.7502730816291607
+Old Hamiltonian = 836.3198403674348
+New Hamiltonian = 836.2860681449944
+DeltaH = -0.03377222244046152
+Accepted!
+Old Hamiltonian = 828.8529563673638
+New Hamiltonian = 828.7612013035316
+DeltaH = -0.09175506383223819
+Accepted!
+Kritter = 181, av_sigma = 0.7491093793336725
+Old Hamiltonian = 874.8210704805317
+New Hamiltonian = 874.8590648781031
+DeltaH = 0.03799439757142409
+Accepted!
+Old Hamiltonian = 873.5160324033404
+New Hamiltonian = 873.4086811367468
+DeltaH = -0.1073512665935823
+Accepted!
+Kritter = 182, av_sigma = 0.7505310931458256
+Old Hamiltonian = 872.7872398402039
+New Hamiltonian = 872.8359703952916
+DeltaH = 0.048730555087672656
+Accepted!
+Old Hamiltonian = 873.314610319463
+New Hamiltonian = 873.3463776740986
+DeltaH = 0.03176735463557634
+Accepted!
+Kritter = 183, av_sigma = 0.7508085711114444
+Old Hamiltonian = 851.4540527852455
+New Hamiltonian = 851.5077194414831
+DeltaH = 0.05366665623762401
+Accepted!
+Old Hamiltonian = 841.9398070194884
+New Hamiltonian = 841.9190261666613
+DeltaH = -0.020780852827101626
+Accepted!
+Kritter = 184, av_sigma = 0.7489018606456443
+Old Hamiltonian = 865.7162197830562
+New Hamiltonian = 865.7703420567755
+DeltaH = 0.054122273719258374
+Accepted!
+Old Hamiltonian = 869.7758150739785
+New Hamiltonian = 869.7417471284
+DeltaH = -0.03406794557849935
+Accepted!
+Kritter = 185, av_sigma = 0.747115576938472
+Old Hamiltonian = 874.2327571769537
+New Hamiltonian = 874.2212681631559
+DeltaH = -0.01148901379781364
+Accepted!
+Old Hamiltonian = 869.2649676430447
+New Hamiltonian = 869.2025153078814
+DeltaH = -0.06245233516324333
+Accepted!
+Kritter = 186, av_sigma = 0.7462526166178826
+Old Hamiltonian = 858.3300994136189
+New Hamiltonian = 858.2917566803563
+DeltaH = -0.038342733262538786
+Accepted!
+Old Hamiltonian = 858.1643183429959
+New Hamiltonian = 858.0530481557786
+DeltaH = -0.11127018721731474
+Accepted!
+Kritter = 187, av_sigma = 0.7515372749023899
+Old Hamiltonian = 853.5309855954043
+New Hamiltonian = 853.5048172829249
+DeltaH = -0.026168312479398992
+Accepted!
+Old Hamiltonian = 851.8816942505321
+New Hamiltonian = 851.7253058594886
+DeltaH = -0.15638839104349245
+Accepted!
+Kritter = 188, av_sigma = 0.7485331819894928
+Old Hamiltonian = 842.4501567255943
+New Hamiltonian = 842.5215128968343
+DeltaH = 0.07135617124004057
+Accepted!
+Old Hamiltonian = 841.0280479198002
+New Hamiltonian = 841.0328480826608
+DeltaH = 0.004800162860647106
+Accepted!
+Kritter = 189, av_sigma = 0.7447349244081917
+Old Hamiltonian = 862.6299438682055
+New Hamiltonian = 862.4643784625837
+DeltaH = -0.16556540562180544
+Accepted!
+Old Hamiltonian = 866.0980830071576
+New Hamiltonian = 865.999032372832
+DeltaH = -0.09905063432563566
+Accepted!
+Kritter = 190, av_sigma = 0.7458146117911819
+Old Hamiltonian = 840.1430449412771
+New Hamiltonian = 840.0842967362457
+DeltaH = -0.05874820503140654
+Accepted!
+Old Hamiltonian = 842.3362093486498
+New Hamiltonian = 842.2786797492486
+DeltaH = -0.057529599401277665
+Accepted!
+Kritter = 191, av_sigma = 0.7446620857072467
+Old Hamiltonian = 875.0551122985919
+New Hamiltonian = 874.993766292796
+DeltaH = -0.06134600579594007
+Accepted!
+Old Hamiltonian = 875.386959022079
+New Hamiltonian = 875.3158718496649
+DeltaH = -0.07108717241419527
+Accepted!
+Kritter = 192, av_sigma = 0.7451161893673455
+Old Hamiltonian = 842.5264249063766
+New Hamiltonian = 842.5604375045059
+DeltaH = 0.034012598129265825
+Accepted!
+Old Hamiltonian = 853.2910082966705
+New Hamiltonian = 853.2547847760144
+DeltaH = -0.03622352065610812
+Accepted!
+Kritter = 193, av_sigma = 0.7497721810739859
+Old Hamiltonian = 827.321856558882
+New Hamiltonian = 827.2423732036656
+DeltaH = -0.07948335521643912
+Accepted!
+Old Hamiltonian = 830.2317316868152
+New Hamiltonian = 830.1658189023444
+DeltaH = -0.06591278447081095
+Accepted!
+Kritter = 194, av_sigma = 0.7403584947559856
+Old Hamiltonian = 913.1419020474775
+New Hamiltonian = 912.9103707050508
+DeltaH = -0.23153134242670603
+Accepted!
+Old Hamiltonian = 905.7232918653463
+New Hamiltonian = 905.4962563968508
+DeltaH = -0.22703546849550094
+Accepted!
+Kritter = 195, av_sigma = 0.7473154755001055
+Old Hamiltonian = 840.8992081953462
+New Hamiltonian = 840.8249351518859
+DeltaH = -0.07427304346026631
+Accepted!
+Old Hamiltonian = 831.0442587557886
+New Hamiltonian = 830.9424514500786
+DeltaH = -0.1018073057100537
+Accepted!
+Kritter = 196, av_sigma = 0.7455709190419015
+Old Hamiltonian = 856.6476503779259
+New Hamiltonian = 856.5324738227677
+DeltaH = -0.11517655515820024
+Accepted!
+Old Hamiltonian = 857.7891584108833
+New Hamiltonian = 857.6929792681724
+DeltaH = -0.09617914271086647
+Accepted!
+Kritter = 197, av_sigma = 0.7450375207931942
+Old Hamiltonian = 883.8626660019471
+New Hamiltonian = 883.8411444290286
+DeltaH = -0.021521572918459242
+Accepted!
+Old Hamiltonian = 871.652592439871
+New Hamiltonian = 871.6317157810511
+DeltaH = -0.020876658819929617
+Accepted!
+Kritter = 198, av_sigma = 0.7425334307903235
+Old Hamiltonian = 836.9531764613237
+New Hamiltonian = 836.9172870951246
+DeltaH = -0.035889366199057804
+Accepted!
+Old Hamiltonian = 833.6884763108172
+New Hamiltonian = 833.6369561427183
+DeltaH = -0.05152016809893212
+Accepted!
+Kritter = 199, av_sigma = 0.737951036773476
+Acceptance rate = 0.9975
+ =======================Success============================
+ =============Shifting from out.dat to console ============

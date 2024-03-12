@@ -11,7 +11,6 @@ Tup = 1
 Tdn = 2
 Xdn = 3
 Ndirs = 4
-#define OPPdir(dir) (3-(dir))	// Opposite direction
 
 COLDLAT = 0
 HOTLAT = 1
@@ -84,7 +83,6 @@ iseed2 = 123456789
 iy = 0
 iv = [0] * NTAB
 
-h_delta = []
 
 class LATTICE:
     def __init__(self,volume_):
@@ -210,7 +208,7 @@ def make_lattice():
     global lattice, Volume, Nx, neighbor
 
     lattice = LATTICE(Volume)
-    neighbor = np.array(list(list(0.0 for i in range(volume)) for j in range(4)))
+    neighbor = np.array(list(list(0.0 for i in range(Volume)) for j in range(4)))
 
     for t_ in range(Nt):
         for x_ in range(Nx):
@@ -254,35 +252,6 @@ def getprompt():
     prompt = 1
     return prompt
 
-
-def autocorel(sigma_av, lb, a_index):
-
-    global T_cut, MAXT_cut, seg_length, ac_store, NOT_cut, T_int, D_cut
-    rho = np.zeros(MAXT_cut)
-
-    c0 = 0.0; N_t = 0; tcut = T_cut
-
-
-    #Calculating the unnormalized autocorrelation functions ct and c0
-    #and normalized autocorrelation function rho.
-    c0 = np.sum((ac_store[lb:(lb+seg_length)] - sigma_av)**2)/seg_length
-
-
-    for u in range(0, NOT_cut):
-        for t in range(1, tcut+1):
-            N_t = seg_length - t
-            ct = np.sum(((ac_store[lb:(lb+N_t)] - sigma_av)**2)/N_t)
-            rho[t-1] += ct/c0
-
-        T_int[u][:tcut][a_index] = 0.5
-
-        #Calculation of tau_int, the integrated autocorrelation time
-        for t in range(0, tcut):
-                T_int[u][t][a_index] = np.sum(rho[:(t+1)])
-
-        tcut += D_cut
-
-
 def average_sigma():
     global Volume, lattice
 
@@ -298,9 +267,8 @@ def average_sigma():
 def average_pbp():
 
     print("check this function with sir")
-
-
-
+    
+    
 def congrad(src,dest,cgiter,residue,cgflag,flv):
     niter = None
     i = None
@@ -374,80 +342,6 @@ def congrad(src,dest,cgiter,residue,cgflag,flv):
     if size_r > residue:
         print("CG_MD Not Converged")
         system.exit(1)
-
-
-def cg_prop(src , dest , cgiter , residue, cgflag):
-    global volume, lattice, PLUS, MINUS, EVENANDODD, lattice
-    N_iter = 0
-    size_src = 0.0
-    cp = 0.0
-    dsize_r = 0.0
-    dsize_src = 0.0
-    size_r = 0.0
-    a = 0.0
-    b = 0.0
-    c = 0.0
-
-    # Normalisation
-    dsize_src = np.sum(lattice[src][:]**2)
-    size_src = math.sqrt(dsize_src)
-
-    # Initial guess
-    if cgflag == 0:
-
-        lattice[dest][:] = 0
-        lattice.r[:] = lattice[src][:]
-
-        dsize_r = 1.0
-        size_r = dsize_r
-
-    if cgflag != 0:
-
-        matd2d(dest,"mp",PLUS,EVENANDODD)
-        dsize_r = 0.0
-
-        lattice.r[:] = lattice[src][:] - lattice.mp[:]
-        dsize_r = np.sum(lattice.r[:]**2)
-        size_r = math.sqrt(dsize_r)/size_src
-
-    matd2d("r","p",MINUS,EVENANDODD)
-
-    cp = 0.0
-
-    cp = np.sum(lattice.p[:]**2)
-    # Start of CG iteration loop
-
-    while N_iter < cgiter and size_r > residue:
-        c = cp
-
-        matd2d("p","mp",PLUS,EVENANDODD)
-
-        d = 0.0
-        d = np.sum(lattice.mp[:]**2)
-        a = c/d
-
-
-        lattice[dest][:] = lattice[dest][:] + a*lattice.p[:]
-        lattice.r[:] = lattice.r[:] - a*lattice.mp[:]
-
-        matd2d("r","mp",MINUS,EVENANDODD)
-
-        cp = 0.0
-        cp = np.sum(lattice.mp[:]**2)
-
-        b = cp/c
-
-        dsize_r = 0.0
-
-        lattice.p[:] = lattice.mp[:] + b*lattice.p[:]
-
-        dsize_r = np.sum(lattice.r[:]**2)
-        size_r = math.sqrt(dsize_r)/size_src
-        N_iter += 1
-    print("From CG_Prop",N_iter)
-    if size_r > residue:
-        print("CG_PROP Not Converged")
-
 
 def matd2d(src,dest,isign):
     i = None
@@ -532,54 +426,6 @@ def matp2p(src,dest,isign,flav):
 
 
 
-def propagator():
-
-    prompt = None
-    i = None
-    m = None
-    n = None
-    n0 = None
-    t = None
-    x = None
-    xl = None
-    xu = None
-    source = None
-    lspi = None
-
-
-    global lattice, volume, prop, tprop, nt, nx, mid
-
-    lpsi = 0.0
-
-    tprop = np.array(list(0.0 for i in range(nt)))
-
-    lattice.r[:] = 0.0
-
-    for t in range(nt):
-        source = (t * nx) + mid
-        lattice[source].r[:] = 1.0
-
-        cg_prop("r", "mmp", cgiter1, residue1, 0)
-
-        for x in range(nx):
-            xl = x * nx
-            xu = ((x + 1) * nx) - 1
-            n0 = x - t
-            if n0 < 0:
-                n0 += nt
-            prop[n0] = 0.0
-
-            for m in range(xl, xu):
-                prop[n0] += lattice.mmp[m]
-
-            tprop[n0] += prop[n0]
-
-        lpsi += lattice.mmp[source]
-
-    tprop = tprop/nt
-    lpsi = lpsi / nt
-
-    return lpsi
 
 
 def nn_coords(x,t,dir):
@@ -603,7 +449,7 @@ def make_nn_gathers():
 
     #This will run only once hence not vectorised
 
-    global neighbor, lattice
+    global neighbor, lattice, Volume
     i = None
     j = None
     dir = None
@@ -613,7 +459,7 @@ def make_nn_gathers():
     mul = None
 
     for dir in range(0,4):
-        for i in range(volume):
+        for i in range(Volume):
             xpt, tpt = nn_coords(lattice.x[i],lattice.t[i], dir)
             j = site_index(xpt,tpt)
             neighbor[dir,i] = j
@@ -638,7 +484,7 @@ def kramer():
     count = 0
 
     lattice.phi[:] = lattice.sigma[:]
-    lattice.rho[:] = np.random.normal(lattice.rho.shape)
+    lattice.rho[:] = np.random.normal(loc = 0, scale = 1, size = lattice.rho.shape)
 
     term1 = -1*Eps*Step
     term2 = math.sqrt(1 - math.exp(2*term1))
@@ -666,9 +512,11 @@ def kramer():
         print("Accepted!")
         lattice.sigma[:] = lattice.phi[:]
         lattice.mom[:] = lattice.pi[:]
+        return 1
     else:
         print("Rejected!")
         lattice.mom[:] = -1*lattice.pi[:]
+        return 0
 
 
 def layout():
@@ -697,7 +545,7 @@ def hamil(hflag, flag):
     i,n = 0,0
     h = 0
 
-    hml = np.sum(((0.5/(G*G)) * lattice.phi* lattice.phi)) + np.sum((0.5 * lattice.mom * lattice.mom))
+    hml = np.sum(((0.5/(G*G)) * lattice.phi* lattice.phi)) + np.sum((0.5 * lattice.pi * lattice.pi))
 
     if hflag != 0:
         for n in range(Nf):
@@ -773,93 +621,16 @@ def piup(t):
         matp2p("xi","omega",PLUS,n)
         lattice.pi[:] = lattice.pi[:] + (2 * lattice.omega[:, n] * lattice.xi[:, n] * t)
 
-def ran2():
-    global iseed, iseed2, iy, iv
-    j = 0
-    k = 0
-    temp = 0.0
 
-    if iseed <= 0:
-        if -iseed < 1:
-            iseed = 1
-        else:
-            iseed = -iseed
-            iseed2 = iseed
-            for j in range(NTAB + 7, 0, -1):
-                k = iseed // IQ1
-                iseed = IA1 * (iseed - k * IQ1) - k * IR1
-                if iseed < 0:
-                    iseed += IM1
-                if j < NTAB:
-                    iv[j] = iseed
-            iy = iv[0]
-
-    k = iseed // IQ1
-    iseed = IA1 * (iseed - k * IQ1) - k * IR1
-    if iseed < 0:
-        iseed += IM1
-    k = iseed2 // IQ2
-    iseed2 = IA2 * (iseed2 - k * IQ2) - k * IR2
-    if iseed2 < 0:
-        iseed2 += IM2
-    j = int(iy // NDIV)
-    iy = iv[j] - iseed2
-    iv[j] = iseed
-    if iy < 1:
-        iy += IMM1
-    if (temp := AM * iy) > RNMX:
-        return RNMX
-    else:
-        return temp
-
-
-def gauss():
-    global iset, gset
-
-    if iset == 0:
-        while True:
-            v1 = (2.0 * ran2()) - 1.0
-            v2 = (2.0 * ran2()) - 1.0
-            rsq = (v1 * v1) + (v2 * v2)
-            if not (rsq >= 1.0 or rsq == 0.0):
-                break
-
-        fac = math.sqrt(-1 * math.log(rsq) / rsq)
-        gset = v1 * fac
-        iset = 1
-        return v2 * fac
-    else:
-        iset = 0
-        return gset
-
-def gasdev():
-    global iset, gset
-
-    if iset == 0:
-        while True:
-            v1 = (2.0 * ran2()) - 1.0
-            v2 = (2.0 * ran2()) - 1.0
-            rsq = (v1 * v1) + (v2 * v2)
-            if not (rsq >= 1.0 or rsq == 0.0):
-                break
-
-        fac = math.sqrt(-2.0 * math.log(rsq) / rsq)
-        gset = v1 * fac
-        iset = 1
-        return v2 * fac
-    else:
-        iset = 0
-        return gset
-
-def get_lattice():
-    global lattice
-    return lattice
-
-def OPPdir(dir):
-    return 3-dir
 
 def main():
     global KRtraj, lattice
+    console = sys.stdout
+    print(" ===================== KRAMER'S ALGORITHM =====================")
+    print(" =============Shifting from console to out.dat file============")
+    f = open("./OUTPUT.dat","w")
+    sys.stdout = f
+    AVERAGE_SIGMA = []
     prompt = setup()
     readin(prompt)
 
@@ -867,6 +638,7 @@ def main():
     l=0
     numkr=0
     numaccp=0
+    
     for j in range(0,KRtraj):
 
         lattice.mom = np.random.normal(loc=0,scale=1,size=lattice.mom.shape)
@@ -881,8 +653,13 @@ def main():
                 numaccp = numaccp + 1
                 k = k + 1
         print(f"Kritter = {j}, av_sigma = {average_sigma()}")
-    print(f"Acceptance rate = {numaccp/numkr}")
+        AVERAGE_SIGMA.append(average_sigma())
+        acceptance_rate = numaccp/numkr
+    print(f"Acceptance rate = {acceptance_rate}")
+    print(" =======================Success============================")
+    print(" =============Shifting from out.dat to console ============")
+    sys.stdout = console
+    print(f"Acceptance rate = {acceptance_rate}")
+    return AVERAGE_SIGMA, acceptance_rate
 
-def ret_h():
-    global h_delta
-    return h_delta
+
