@@ -31,9 +31,6 @@ double piup(double tau);
 // kramer.c
 int kramer(void);
 
-// hmc.c
-int hmc(void);
-
 // measurement.c
 double average_sigma(void);
 double average_pbp(void);

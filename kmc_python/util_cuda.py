@@ -1,5 +1,6 @@
 ### Util for the KMC code with numpy vectorisation :>
-import numpy as np
+import cupy as np
+import numpy
 import sys
 import math
 import random
@@ -154,7 +155,7 @@ def initial_set():
     return prompt
 
 def readin(prompt,params_dict = None):
-    global Nf, G, Step, Eps, KRtraj, KRmax, Measlen, CgiterH, ResidueH, CgiterP, ResidueP, KRwarmup
+    global Nf, G, Step, Eps, KRtraj, KRmax, Measlen, CgiterH, ResidueH, CgiterP, ResidueP
     global Nx, Nt, N, Volume
     
     if prompt == 1:
@@ -164,7 +165,6 @@ def readin(prompt,params_dict = None):
         Eps = get_lf(prompt, "noise_parameter")
         KRtraj = get_i(prompt, "kr_trajectory_length")
         KRmax = get_i(prompt, "kr_refreshing_steps")
-        KRwarmup = get_i(prompt, "kr_warmup_steps")
         Measlen = get_i(prompt, "measurement_interval")
         CgiterH = get_i(prompt, "max_cg_iter_for_hamil")
         ResidueH = get_lf(prompt, "residue_cg_hamil")
@@ -181,7 +181,6 @@ def readin(prompt,params_dict = None):
             Eps = params_dict["noise_parameter"]
             KRtraj = params_dict["kr_trajectory_length"]
             KRmax = params_dict["kr_refreshing_steps"]
-            KRwarmup = params_dict["kr_warmup_steps"]
             Measlen = params_dict["measurement_interval"]
             CgiterH = params_dict["max_cg_iter_for_hamil"]
             ResidueH = params_dict["residue_cg_hamil"]
@@ -263,7 +262,7 @@ def average_sigma():
     av_sigma = t_sigma/Volume
     return av_sigma
 
-    
+
 def average_pbp():
 
     print("check this function with sir")
@@ -342,7 +341,6 @@ def congrad(src,dest,cgiter,residue,cgflag,flv):
 
     if size_r > residue:
         print("CG_MD Not Converged")
-        print(size_r)
         system.exit(1)
 
 def matd2d(src,dest,isign):
@@ -478,6 +476,10 @@ def gather(field, index, dest):
 def kramer():
     global lattice, Nf, MINUS, Eps, Step
 
+    i, j, m, n = 0, 0, 0, 0
+    hold, hnew, deltah = 0.0, 0.0, 0.0
+    xx = 1.0
+    z = 0
     max_count = 100
     count = 0
 
@@ -486,40 +488,35 @@ def kramer():
 
     term1 = -1*Eps*Step
     term2 = math.sqrt(1 - math.exp(2*term1))
-    
     lattice.pi[:] = math.exp(term1)*lattice.mom[:] + term2*lattice.rho[:]
 
-    # try:
     hold = hamil(1,1)
-    # print("Old Hamiltonian",hold)
+    # print(f"Old Hamiltonian = {hold}")
+
     piup(Step/2)
-    # print("Initial Half Step taken")
+
     lattice.phi[:] = lattice.phi[:] + Step*lattice.pi[:]
-    # print("Leapfrog done")
+
     piup(Step/2)
-    # print("Final Half step done")   
+
     hnew = hamil(1,1)
-    # print("New Hamiltonian",hnew)
+    # print(f"New Hamiltonian = {hnew}")
 
     xx = random.random()
     deltah = hnew-hold
-    if deltah > 50: #Possible explosion, all values discarded
-        return -1
-    # print("The value of deltah is",deltah)
-    z = min(1,math.exp(-1*deltah))
-    
+
+    # print(f"DeltaH = {deltah}")
+    z = math.exp(-1*deltah)
+
     if xx<z:
         # print("Accepted!")
-        # print("--------------------------")
         lattice.sigma[:] = lattice.phi[:]
         lattice.mom[:] = lattice.pi[:]
         return 1
     else:
         # print("Rejected!")
-        # print("--------------------------")
         lattice.mom[:] = -1*lattice.pi[:]
         return 0
-        
 
 
 def layout():
@@ -622,26 +619,21 @@ def piup(t):
         lattice.pi[:] = lattice.pi[:] + (2 * lattice.omega[:, n] * lattice.xi[:, n] * t)
 
 
-        
-        
-def main(prompt = None, file = None, dict_=None, suppress_output = False, write_file = None):
+
+def main(prompt = None, file = None, dict_=None, suppress_output = False):
     """
     Entry module for the code
     prompt (int): The way the parameters will be entered, 0 will read from JSON 1 will take the input from USER, 2 will take a dict
     file (str): Path to the JSON file if the parameters will be read
-    write_file (str): Name of the numpy array in which the measurements will stored for analysis
     """
-    global KRtraj,KRwarmup, lattice, Measlen
+    global KRtraj, lattice
     console = sys.stdout
-    
-    configurations = []
     
     if suppress_output is False:
         print(" ===================== KRAMER'S ALGORITHM =====================")
         print(" =============Shifting from console to out.dat file============")
 
     AVERAGE_SIGMA = []
-    AVERAGE_XI = []
     params_dict = None
     
     if prompt is None:
@@ -676,43 +668,29 @@ def main(prompt = None, file = None, dict_=None, suppress_output = False, write_
     numkr=0
     numaccp=0
     
-    for j in range(0,KRtraj+KRwarmup):
+    for j in tqdm(range(0,KRtraj)):
 
         lattice.mom = np.random.normal(loc=0,scale=1,size=lattice.mom.shape)
         lattice.zeta = np.random.normal(loc=0,scale=(1/math.sqrt(2)),size=lattice.zeta.shape)
 
-        
-        k = 0
-        while (k<KRmax):
+        for k in range(0,KRmax):
             krflag = kramer()
             if krflag == 0:
                 numkr = numkr + 1
-            if krflag == 1:
+            else:
                 numkr = numkr + 1
                 numaccp = numaccp + 1
                 k = k + 1
-            if krflag == -1:
-                lattice.mom = np.random.normal(loc=0,scale=1,size=lattice.mom.shape)
-                lattice.zeta = np.random.normal(loc=0,scale=(1/math.sqrt(2)),size=lattice.zeta.shape)
-                
         if suppress_output is False:        
             print(f"Kritter = {j}, av_sigma = {average_sigma()}")
-            
-        if j > KRwarmup:
-            AVERAGE_SIGMA.append(average_sigma())
-            if j%Measlen == 0:
-                configurations.append(lattice.sigma[:][:,None].copy())
-    
-    acceptance_rate = numaccp/numkr
-    configurations = np.concatenate(configurations,axis = -1)
-    if write_file:
-        np.save(write_file+".npy",configurations)
-    
+        AVERAGE_SIGMA.append(average_sigma())
+        acceptance_rate = numaccp/numkr
     if suppress_output is False:
         print(f"Acceptance rate = {acceptance_rate}")
         print(" =======================Success============================")
         print(" =============Shifting from out.dat to console ============")
-        f.close()
         sys.stdout = console
         print(f"Acceptance rate = {acceptance_rate}")
     return AVERAGE_SIGMA, acceptance_rate
+
+

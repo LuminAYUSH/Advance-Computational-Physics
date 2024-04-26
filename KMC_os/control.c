@@ -50,24 +50,19 @@ int main(int argc,char *argv[])
 	for(nf=0;nf<Nf;nf++) s->zeta.f[nf]=gsl_ran_gaussian(r,1/sqrt(2));
 	}
 
-     for(k=0;k<KRmax;)
-     {
-        krflag=kramer();
-        if(krflag==0)
-        {	// rejected
-          ++numkr;
-          }
-        else{		// accepted
-          ++numkr;
-          ++numaccp;
-          ++k;
-          }
+     for(k=0;k<KRmax;){
+	krflag=kramer();
+	if(krflag==0){	// rejected
+	  ++numkr;
+	  }
+	else{		// accepted
+	  ++numkr; ++numaccp; ++k;
+	  }
 	} // krmax-loop
 
-     printf("Kriter= %d\t av_sigma= %e\n",j,fabs(average_sigma()));
+     // printf("Kriter= %d\t av_sigma= %e\n",j,fabs(average_sigma()));
 
      } // krtraj-loop
-
   printf("\nAcceptance rate = %.4lf\n",(double)numaccp/(double)numkr);
 
   // save sigma if requested
@@ -81,8 +76,10 @@ int main(int argc,char *argv[])
 
   // Mark time
   dtime+=dclock();
-  printf("2-dim KS Gross-Neveu completed!\n");
+  // printf("2-dim KS Gross-Neveu completed!\n");
   printf("Time = %e seconds\n",dtime);
+  printf("The Value of coupling = %.2lf\n",G);
+  printf("The Value of step_size = %.4lf\n",Step);
   fflush(stdout);
 
 } // end of main

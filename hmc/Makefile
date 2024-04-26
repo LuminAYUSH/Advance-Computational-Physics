@@ -9,7 +9,7 @@ default:
 	echo TYPE make FILENAME.
 
 gn_hmc31: $(OBJFILES)
-	cc -O3 $(OBJFILES) -lm -o /user1/de/mcrun/gn_hmc31
+	cc -O3 $(OBJFILES) -lm -o /pscratch/sd/d/diptarko/Thesis/Advance-Computational-Physics/TEST/gnhmc
 
 gn_hmc.o: gn_hmc.c lattice_gn.h
 	cc $(CFLAGS) gn_hmc.c
